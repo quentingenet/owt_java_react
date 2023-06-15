@@ -1,4 +1,4 @@
-#Open Weight Tracker
+# Open Weight Tracker
 
 ***OpenWeightTracker (OWT)*** is a free and opensource application under Copyleft.
 <br>This is a simple and easy way to have a look on your  weight ! 
