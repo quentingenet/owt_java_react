@@ -17,7 +17,7 @@ In a first time, you must use the **"SignIn"** functionality to create your firs
 
 
 ## Application build details : Database structure diagram
-![MPD diagram](https://gitlab.com/genetquentin/openweighttracker_backend/-/raw/main/docs/OWT_MCD.png)
+![MPD diagram](https://github.com/quentingenet/owt/blob/main/owt-back/docs/OWT_MCD.png)
 
 ## API routes description
 
