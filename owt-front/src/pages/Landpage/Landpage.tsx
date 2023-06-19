@@ -10,7 +10,7 @@ export default function Landpage() {
 
 	return (
 		<>
-			<Grid container>
+			<Grid container marginTop={6}>
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 					<div className="titleLandpage">
 						<h1>Open Weight Tracker</h1>
@@ -27,9 +27,9 @@ export default function Landpage() {
 					justifyContent={'center'}
 				>
 					<div className="scaleIcon">
-						<span>FREE</span>
+						<span className="iconScale">FREE</span>
 						<img src={scale} alt="OWT" />
-						<span>OPEN SOURCE</span>
+						<span className="iconScale">OPEN SOURCE</span>
 					</div>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
@@ -38,7 +38,7 @@ export default function Landpage() {
 							Open Weight Tracker is an application that allows you to track your
 							weight. It's free and opensource.
 							<br />
-							Is it your first time here ?
+							<span className="firstTime">Is it your first time here ?</span>
 						</p>
 					</div>
 				</Grid>
@@ -49,13 +49,13 @@ export default function Landpage() {
 						justifyContent={'center'}
 						alignItems="center"
 					>
-						<Typography>Login</Typography>
+						<Typography variant="h4">Login</Typography>
 						<Switch
 							size="medium"
 							inputProps={{ 'aria-label': 'ant design' }}
 							onChange={(e) => setIsFirstConnection(e.target.checked)}
 						/>
-						<Typography>Register</Typography>
+						<Typography variant="h4">Register</Typography>
 					</Stack>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

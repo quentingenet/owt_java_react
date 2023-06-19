@@ -4,9 +4,9 @@
 
 .descriptionLandpage {
     font-size: 22px;
-    max-width: 40%;
     min-width: 40%;
-    margin: auto;
+    max-width: 50%;
+    margin: 0 auto;
 }
 
 .scaleIcon{
@@ -19,7 +19,8 @@
     background-color: #1976D2;
     border-radius: 20px
 }
-span{
+
+span.iconScale{
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -28,4 +29,9 @@ span{
     color: white;
     font-weight: bold;
     padding: 3%;
+}
+
+span.firstTime{
+    font-weight: bold;
+    font-size: 25px;
 }
