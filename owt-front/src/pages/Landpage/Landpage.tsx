@@ -49,13 +49,13 @@ export default function Landpage() {
 						justifyContent={'center'}
 						alignItems="center"
 					>
-						<Typography variant="h4">Login</Typography>
+						<Typography variant="h5">Login</Typography>
 						<Switch
 							size="medium"
 							inputProps={{ 'aria-label': 'ant design' }}
 							onChange={(e) => setIsFirstConnection(e.target.checked)}
 						/>
-						<Typography variant="h4">Register</Typography>
+						<Typography variant="h5">Register</Typography>
 					</Stack>
 				</Grid>
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
