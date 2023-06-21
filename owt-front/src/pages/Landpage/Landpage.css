@@ -1,5 +1,6 @@
-.titleLandpage .descriptionLandpage{
+.titleLandpage{
     text-align: center;
+    color: #D4D3DC;
 }
 
 .descriptionLandpage {
@@ -26,12 +27,11 @@ span.iconScale{
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: white;
+    color: #D4D3DC;
     font-weight: bold;
     padding: 3%;
 }
 
 span.firstTime{
     font-weight: bold;
-    font-size: 25px;
 }
