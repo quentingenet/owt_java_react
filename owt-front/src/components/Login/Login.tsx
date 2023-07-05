@@ -22,8 +22,14 @@ export default function Login() {
 	};
 
 	const validationSchema = yup.object({
-		username: yup.string().required('You must enter your username.'),
-		password: yup.string().required('You must enter your password.'),
+		username: yup
+			.string()
+			.min(3, 'Username must contain at least 3 characters.')
+			.required('You must enter your username.'),
+		password: yup
+			.string()
+			.min(4, 'Password must contain at least 4 characters.')
+			.required('You must enter your password.'),
 	});
 
 	const {
@@ -41,7 +47,7 @@ export default function Login() {
 		password: watch('password'),
 	};
 	const submitLogin = () => {
-		console.log('SUBMIT');
+		console.log('DATA LOGIN : ', dataLogin);
 	};
 
 	return (
@@ -52,7 +58,6 @@ export default function Login() {
 						<Controller
 							name="username"
 							control={control}
-							{...errors}
 							defaultValue=""
 							render={({ field }) => (
 								<TextField
@@ -61,7 +66,6 @@ export default function Login() {
 									label="Username"
 									type="text"
 									variant="outlined"
-									required
 									error={Boolean(errors.username)}
 									InputProps={{
 										endAdornment: (
@@ -78,13 +82,17 @@ export default function Login() {
 								/>
 							)}
 						/>
+						{errors.username && (
+							<Grid item xs={12}>
+								<span className="errorText">{errors.username.message}</span>
+							</Grid>
+						)}
 					</Grid>
 					<Grid item marginY={3} xs={12}>
 						<Controller
 							name="password"
 							control={control}
 							defaultValue=""
-							{...errors}
 							render={({ field }) => (
 								<TextField
 									{...field}
@@ -92,7 +100,6 @@ export default function Login() {
 									label="Password"
 									type={showPassword ? 'text' : 'password'}
 									variant="outlined"
-									required
 									InputProps={{
 										endAdornment: (
 											<InputAdornment position="end">
@@ -114,6 +121,11 @@ export default function Login() {
 								/>
 							)}
 						/>
+						{errors.password && (
+							<Grid item xs={12}>
+								<span className="errorText">{errors.password.message}</span>
+							</Grid>
+						)}
 					</Grid>
 					<Grid item marginY={2} xs={12}>
 						<Button type="submit" variant="contained" color="primary" size="large">
