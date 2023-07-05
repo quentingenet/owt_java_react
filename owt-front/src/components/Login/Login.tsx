@@ -6,6 +6,7 @@ import { ILoginForm } from '../../models/ILoginForm';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { login as loginService } from '../../services/UserService';
 
 export default function Login() {
 	const [showPassword, setShowPassword] = useState(false);
@@ -36,18 +37,24 @@ export default function Login() {
 		handleSubmit,
 		control,
 		watch,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = useForm<ILoginForm>({
 		defaultValues: initialValues,
 		resolver: yupResolver(validationSchema),
 	});
 
-	const dataLogin: ILoginForm = {
+	let dataLogin: ILoginForm = {
 		username: watch('username'),
 		password: watch('password'),
 	};
+
 	const submitLogin = () => {
-		console.log('DATA LOGIN : ', dataLogin);
+		if (isValid) {
+			loginService(dataLogin);
+			console.log('DATA LOGIN : ', dataLogin);
+		} else {
+			console.log('Incomplete form.');
+		}
 	};
 
 	return (
@@ -66,7 +73,6 @@ export default function Login() {
 									label="Username"
 									type="text"
 									variant="outlined"
-									error={Boolean(errors.username)}
 									InputProps={{
 										endAdornment: (
 											<InputAdornment position="end">
