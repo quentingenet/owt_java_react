@@ -7,8 +7,11 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { login as loginService } from '../../services/UserService';
+import { useUserContext } from '../../contexts/UserContext';
 
 export default function Login() {
+	const userContext = useUserContext();
+
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -51,7 +54,8 @@ export default function Login() {
 	const submitLogin = () => {
 		if (isValid) {
 			loginService(dataLogin);
-			console.log('DATA LOGIN : ', dataLogin);
+			userContext.isUserLoggedIn = true;
+			userContext.jwt = localStorage.getItem('jwt') || '';
 		} else {
 			console.log('Incomplete form.');
 		}

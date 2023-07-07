@@ -11,7 +11,7 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
-import './Navbar.css';
+import './NavbarPublic.css';
 import { useState } from 'react';
 
 export default function Navbar() {

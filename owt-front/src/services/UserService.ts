@@ -11,8 +11,8 @@ export const login = (data: ILoginForm) => {
   })
     .then(response => {if (response.ok) {
         const headers = response.headers;
-        const jwt = headers.get('Authorization');
-        console.log('JWT :', jwt);
+        const jwt = headers.get('Authorization') || "";
+        localStorage.setItem('jwt', jwt);
         return response.json();
       } else {
         throw new Error('Erreur lors de la requête à l\'API');

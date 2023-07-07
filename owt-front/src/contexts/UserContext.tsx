@@ -3,6 +3,7 @@ import { IUserContext } from '../models/IUserContext';
 
 export const UserContext = createContext<IUserContext>({
 	id: 0,
+	jwt: '',
 	email: '',
 	username: '',
 	isUserLoggedIn: false,
@@ -27,6 +28,7 @@ export function UserContextProvider({ children }: { children: React.ReactNode })
 	}, []);
 */
 	const value = {
+		jwt: '',
 		id: 0,
 		email: '',
 		username: '',
