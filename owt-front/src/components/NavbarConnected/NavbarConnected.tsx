@@ -56,7 +56,7 @@ export default function NavbarConnected() {
 								textDecoration: 'none',
 							}}
 						>
-							Open Weight Tracker
+							Open Weight Tracker CONNECTED
 						</Typography>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,9 +108,7 @@ export default function NavbarConnected() {
 								color: 'inherit',
 								textDecoration: 'none',
 							}}
-						>
-							Open Weight Tracker
-						</Typography>
+						></Typography>
 						<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 							{pages.map((page) => (
 								<Button

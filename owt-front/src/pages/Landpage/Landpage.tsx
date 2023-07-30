@@ -2,11 +2,11 @@ import { Grid, Stack, Switch, Typography } from '@mui/material';
 import { useState } from 'react';
 import Register from '../../components/Register/Register';
 import Login from '../../components/Login/Login';
-import scale from '../../../public/scale-icon.png';
+import scale from '../../assets/scale-icon.png';
 //import css
 import './Landpage.css';
 export default function Landpage() {
-	const [isFirstConnection, setIsFirstConnection] = useState<boolean>(true);
+	const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
 
 	return (
 		<>

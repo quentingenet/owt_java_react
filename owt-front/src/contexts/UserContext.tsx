@@ -2,11 +2,10 @@ import { createContext, useContext } from 'react';
 import { IUserContext } from '../models/IUserContext';
 
 export const UserContext = createContext<IUserContext>({
-	id: 0,
 	jwt: '',
-	email: '',
-	username: '',
+	setJwt: () => {},
 	isUserLoggedIn: false,
+	setIsUserLoggedIn: () => {},
 });
 
 export function useUserContext() {
@@ -27,12 +26,15 @@ export function UserContextProvider({ children }: { children: React.ReactNode })
 		}
 	}, []);
 */
-	const value = {
+	const value: IUserContext = {
 		jwt: '',
-		id: 0,
-		email: '',
-		username: '',
+		setJwt: function (jwt: string): void {
+			this.jwt = jwt;
+		},
 		isUserLoggedIn: false,
+		setIsUserLoggedIn: function (isUserLoggedIn: boolean): void {
+			this.isUserLoggedIn = isUserLoggedIn;
+		},
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

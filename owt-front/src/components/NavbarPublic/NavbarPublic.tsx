@@ -56,7 +56,7 @@ export default function Navbar() {
 								textDecoration: 'none',
 							}}
 						>
-							Open Weight Tracker
+							Open Weight Tracker PUBLIC
 						</Typography>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,9 +108,7 @@ export default function Navbar() {
 								color: 'inherit',
 								textDecoration: 'none',
 							}}
-						>
-							Open Weight Tracker
-						</Typography>
+						></Typography>
 						<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 							{pages.map((page) => (
 								<Button

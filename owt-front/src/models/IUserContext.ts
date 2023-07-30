@@ -1,7 +1,6 @@
 export interface IUserContext {
-    readonly id: number;
     jwt: string;
-    email: string;
-    username: string;
+    setJwt:(jwt: string) => void;
     isUserLoggedIn: boolean;
+    setIsUserLoggedIn:(isUserLoggedIn: boolean) => void;
 }
