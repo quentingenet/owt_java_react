@@ -1,6 +1,11 @@
-import { createContext, useContext } from 'react';
-import { IUserContext } from '../models/IUserContext';
+import { createContext, useContext, useState } from 'react';
 
+interface IUserContext {
+	jwt: string;
+	setJwt: (jwt: string) => void;
+	isUserLoggedIn: boolean;
+	setIsUserLoggedIn: (isUserLoggedIn: boolean) => void;
+}
 export const UserContext = createContext<IUserContext>({
 	jwt: '',
 	setJwt: () => {},
@@ -13,28 +18,14 @@ export function useUserContext() {
 }
 
 export function UserContextProvider({ children }: { children: React.ReactNode }) {
-	/*
-	useEffect(() => {
-		let localUser = localStorage.getItem('userData') || '';
-		if (localUser) {
-			getUserById(JSON.parse(localUser).id).then((userData) => {
-				id = userData.id;
-				email = userData.email;
-				username = userData.username;
-				isUserLoggedIn = true;
-			});
-		}
-	}, []);
-*/
+	const [jwt, setJwt] = useState<string>('');
+	const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
+
 	const value: IUserContext = {
-		jwt: '',
-		setJwt: function (jwt: string): void {
-			this.jwt = jwt;
-		},
-		isUserLoggedIn: false,
-		setIsUserLoggedIn: function (isUserLoggedIn: boolean): void {
-			this.isUserLoggedIn = isUserLoggedIn;
-		},
+		jwt: jwt,
+		setJwt: setJwt,
+		isUserLoggedIn: isUserLoggedIn,
+		setIsUserLoggedIn: setIsUserLoggedIn,
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

@@ -1,4 +1,11 @@
-import { Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+	Button,
+	Grid,
+	IconButton,
+	InputAdornment,
+	TextField,
+	responsiveFontSizes,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import './Login.css';
 import { Person2, Visibility, VisibilityOff } from '@mui/icons-material';
@@ -12,21 +19,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 	const userContext = useUserContext();
-
-	let localStorageJwt = localStorage.getItem('jwt');
-
-	useEffect(() => {
-		console.log('USER CONTEXT FROM APP before: ', userContext.isUserLoggedIn);
-		if (localStorageJwt !== null && localStorageJwt !== '') {
-			userContext.setJwt(localStorageJwt);
-		}
-		if (localStorageJwt?.startsWith('Bearer', 0)) {
-			console.log('START WITH BEARER', localStorageJwt?.startsWith('Bearer'));
-			userContext.setIsUserLoggedIn(true);
-		}
-		console.log('JWT USER USE EFFECT', userContext.jwt);
-		console.log('USER CONTEXT from app useEffect: ', userContext.isUserLoggedIn);
-	}, [userContext, localStorage]);
 
 	const navigate = useNavigate();
 
@@ -71,13 +63,24 @@ export default function Login() {
 
 	const submitLogin = () => {
 		if (isValid) {
-			loginService(dataLogin);
-			userContext.isUserLoggedIn = true;
-			userContext.jwt = localStorage.getItem('jwt') || '';
-			console.log('USER CONTEXT', userContext);
-			navigate('/dashboard');
-		} else {
-			console.log('Incomplete form.');
+			try {
+				loginService(dataLogin).then((response) => {
+					if (response) {
+						userContext.setIsUserLoggedIn(true);
+						let localStorageJwt = localStorage.getItem('jwt') || '';
+						if (
+							localStorageJwt !== null &&
+							localStorageJwt !== '' &&
+							localStorageJwt?.startsWith('Bearer')
+						) {
+							userContext.setJwt(localStorageJwt);
+							navigate('/dashboard');
+						}
+					}
+				});
+			} catch (error) {
+				console.log('Incomplete form.');
+			}
 		}
 	};
 
