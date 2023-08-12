@@ -18,6 +18,7 @@ export function useUserContext() {
 }
 
 export function UserContextProvider({ children }: { children: React.ReactNode }) {
+
 	const [jwt, setJwt] = useState<string>('');
 	const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
 

@@ -11,10 +11,10 @@ import {
 	Tooltip,
 	Typography,
 } from '@mui/material';
-import './NavbarConnected.css';
+import './Navbar.css';
 import { useState } from 'react';
 
-export default function NavbarConnected() {
+export default function Navbar() {
 	const pages = ['Dashboard', 'Weights', 'Contact'];
 	const settings = ['Dashboard', 'Profile', 'Account', 'Logout'];
 
@@ -56,7 +56,7 @@ export default function NavbarConnected() {
 								textDecoration: 'none',
 							}}
 						>
-              Open Weight Tracker CONNECTED
+							Open Weight Tracker
 						</Typography>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,8 +108,6 @@ export default function NavbarConnected() {
 								color: 'inherit',
 								textDecoration: 'none',
 							}}
-
-						></Typography>
 						>
 							Open Weight Tracker
 						</Typography>
@@ -128,8 +126,7 @@ export default function NavbarConnected() {
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title="Open settings">
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar alt="Quentin" src="" />
-
+									<Avatar alt="Quentin" src="/static/images/avatar/2.jpg" />
 								</IconButton>
 							</Tooltip>
 							<Menu
