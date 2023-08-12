@@ -26,3 +26,4 @@ replay_pid*
 #VSCODE files
 .vscode
 settings.json
+node_modules
