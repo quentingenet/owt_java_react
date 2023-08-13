@@ -25,7 +25,6 @@ export const login = (data: ILoginForm) => {
       }
     })
     .catch(error => {
-
       reject(new Error('Erreur lors de l\'appel à l\'API :' + error));
     });
   });
