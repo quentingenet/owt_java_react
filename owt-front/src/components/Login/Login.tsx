@@ -4,9 +4,8 @@ import {
 	IconButton,
 	InputAdornment,
 	TextField,
-	responsiveFontSizes,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Login.css';
 import { Person2, Visibility, VisibilityOff } from '@mui/icons-material';
 import { ILoginForm } from '../../models/ILoginForm';
