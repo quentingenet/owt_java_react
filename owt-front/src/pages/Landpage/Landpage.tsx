@@ -7,6 +7,7 @@ import scale from '../../assets/scale-icon.png';
 import './Landpage.css';
 export default function Landpage() {
 	const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
+
 	return (
 		<>
 			<Grid container marginTop={6}>

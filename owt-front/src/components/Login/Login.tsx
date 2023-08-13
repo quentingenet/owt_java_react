@@ -1,4 +1,3 @@
-
 import {
 	Button,
 	Grid,
@@ -9,10 +8,6 @@ import {
 import { useState } from 'react';
 import './Login.css';
 import { Person2, Visibility, VisibilityOff } from '@mui/icons-material';
-import { Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
-import { useState } from 'react';
-import './Login.css';
-import { Visibility, VisibilityOff, Person2 } from '@mui/icons-material';
 import { ILoginForm } from '../../models/ILoginForm';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -25,7 +20,6 @@ export default function Login() {
 	const userContext = useUserContext();
 
 	const navigate = useNavigate();
-
 
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -68,7 +62,6 @@ export default function Login() {
 
 	const submitLogin = () => {
 		if (isValid) {
-
 			try {
 				loginService(dataLogin).then((response) => {
 					if (response) {
@@ -87,7 +80,6 @@ export default function Login() {
 			} catch (error) {
 				console.log('Incomplete form.');
 			}
-
 		}
 	};
 

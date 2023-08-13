@@ -56,7 +56,7 @@ export default function NavbarConnected() {
 								textDecoration: 'none',
 							}}
 						>
-              Open Weight Tracker CONNECTED
+							Open Weight Tracker CONNECTED
 						</Typography>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -108,11 +108,7 @@ export default function NavbarConnected() {
 								color: 'inherit',
 								textDecoration: 'none',
 							}}
-
 						></Typography>
-						>
-							Open Weight Tracker
-						</Typography>
 						<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 							{pages.map((page) => (
 								<Button
@@ -129,7 +125,6 @@ export default function NavbarConnected() {
 							<Tooltip title="Open settings">
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 									<Avatar alt="Quentin" src="" />
-
 								</IconButton>
 							</Tooltip>
 							<Menu
