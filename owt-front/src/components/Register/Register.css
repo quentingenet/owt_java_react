@@ -1,0 +1,16 @@
+.registerFormInput{
+    height: 100%;
+    width: 100%;
+    background-color: #D4D3DC;
+    border-radius: 20px;
+}
+
+@media screen and (max-width:768px){
+    .registerFormInput{
+        height: 100%;
+        
+        width: 100%;
+        background-color: #D4D3DC;
+        border-radius: 20px;
+    }   
+}

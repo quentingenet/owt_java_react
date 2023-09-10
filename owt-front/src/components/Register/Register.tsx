@@ -1,20 +1,35 @@
-import { Person2, VisibilityOff, Visibility } from '@mui/icons-material';
-import { Button, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Person2, VisibilityOff, Visibility, Email, CalendarMonth } from '@mui/icons-material';
+import { Button, Grid, IconButton, InputAdornment, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { IRegisterForm } from '../../models/IRegisterForm';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { passwordAtLeast4, passwordWithLetter, passwordWithNumber } from '../../utils/Regex';
+import './Register.css';
+import { useUserContext } from '../../contexts/UserContext';
+import { register as registerService } from '../../services/UserService';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
-	const [showPassword, setShowPassword] = useState(false);
 
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
+	const userContext = useUserContext();
+	const navigate = useNavigate();
+	const [checkedGender, setCheckedGender] = useState(false);
+	const [checkedMeasure, setCheckedMeasure] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
+ 	const handleClickShowPassword = () => setShowPassword((show) => !show);
 	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
 	};
+	
 
+	const handleChangeSwitchMeasure = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setCheckedMeasure(event.target.checked);
+	  };
+	const handleChangeSwitchGender = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setCheckedGender(event.target.checked);
+	  };
 	const initialValues: IRegisterForm = {
 		username: '',
 		password: '',
@@ -63,7 +78,7 @@ export default function Register() {
 		handleSubmit,
 		control,
 		watch,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = useForm<IRegisterForm>({
 		defaultValues: initialValues,
 		resolver: yupResolver(validationSchema),
@@ -83,13 +98,33 @@ export default function Register() {
 
 	const submitRegister = (dataRegister: IRegisterForm) => {
 		// TODO:appel POST api to register
+		if (isValid) {
+			try {
+				registerService(dataRegister).then((response) => {
+					if (response) {
+						userContext.setIsUserLoggedIn(true);
+						let localStorageJwt = localStorage.getItem('jwt') || '';
+						if (
+							localStorageJwt !== null &&
+							localStorageJwt !== '' &&
+							localStorageJwt?.startsWith('Bearer')
+						) {
+							userContext.setJwt(localStorageJwt);
+							navigate('/dashboard');
+						}
+					}
+				});
+			} catch (error) {
+				console.log('Incomplete form.');
+			}
+		}
 	};
 
 	return (
 		<>
 			<Grid container marginTop={3} justifyContent={'center'}>
-				<form onSubmit={handleSubmit(submitRegister)} className="loginFormInput">
-					<Grid item marginY={3} xs={12}>
+				<form onSubmit={handleSubmit(submitRegister)} className="registerFormInput">
+					<Grid item marginY={3} xs={12} md={6}>
 						<Controller
 							name="username"
 							control={control}
@@ -101,31 +136,67 @@ export default function Register() {
 									label="Username"
 									type="text"
 									variant="outlined"
-									required
 									error={Boolean(errors.username)}
 									InputProps={{
 										endAdornment: (
 											<InputAdornment position="end">
-												<IconButton
-													aria-label="toggle password visibility"
-													edge="end"
-												>
 													<Person2 />
-												</IconButton>
 											</InputAdornment>
 										),
 									}}
 								/>
 							)}
 						/>
+					{errors.username && (
+						<Grid item xs={12}>
+							<span className="errorText">{errors.username.message}</span>
+						</Grid>
+					)}
 					</Grid>
-					<Grid item marginY={3} xs={12}>
+					<Grid item marginY={3} xs={12} md={6}>
+						<Controller
+							name="emailUser"
+							control={control}
+							defaultValue=""
+							render={({ field }) => (
+								<TextField
+									{...field}
+									id="emailUser"
+									label="Email"
+									type="text"
+									variant="outlined"
+									error={Boolean(errors.emailUser)}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+									
+													<Email />
+										
+											</InputAdornment>
+										),
+									}}
+								/>
+							)}
+						/>
+					{errors.emailUser && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.emailUser.message}</span>
+					</Grid>
+					)}
+					</Grid>
+					<Grid item marginY={3} xs={12} md={6}>
+					<Controller
+							name="password"
+							control={control}
+							defaultValue=""
+							render={({ field }) => (
 						<TextField
+							{...field}
 							id="password"
 							label="Password"
 							type={showPassword ? 'text' : 'password'}
 							variant="outlined"
-							required
+							error={Boolean(errors.password)}
 							InputProps={{
 								endAdornment: (
 									<InputAdornment position="end">
@@ -140,8 +211,180 @@ export default function Register() {
 									</InputAdornment>
 								),
 							}}
+							/>
+							)}
 						/>
+					{errors.password && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.password.message}</span>
 					</Grid>
+					)}						
+					</Grid>
+					<Grid item marginY={3} xs={12} md={6}>
+					<Controller
+							name="passwordBis"
+							control={control}
+							defaultValue=""
+							render={({ field }) => (
+						<TextField
+							{...field}
+							id="passwordBis"
+							label="Password confirmation"
+							type={showPassword ? 'text' : 'password'}
+							variant="outlined"
+							error={Boolean(errors.passwordBis)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											aria-label="toggle password visibility"
+											onClick={handleClickShowPassword}
+											onMouseDown={handleMouseDownPassword}
+											edge="end"
+										>
+											{showPassword ? <VisibilityOff /> : <Visibility />}
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
+							/>
+							)}
+						/>
+					{errors.passwordBis && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.passwordBis.message}</span>
+					</Grid>
+					)}						
+					</Grid>
+
+					<Grid item marginY={3} xs={12} md={6}>
+					<Controller
+							name="yearBirth"
+							control={control}
+							render={({ field }) => (
+						<TextField
+							{...field}
+							id="yearBirth"
+							label="Year birth"
+							type="number"
+							variant="outlined"
+							error={Boolean(errors.yearBirth)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<CalendarMonth/>
+									</InputAdornment>
+								),
+							}}
+							/>
+							)}
+						/>
+					{errors.yearBirth && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.yearBirth.message}</span>
+					</Grid>
+					)}						
+					</Grid>
+
+					<Grid item marginY={3} xs={12} md={6}>
+					<Controller
+							name="bodySize"
+							control={control}
+							render={({ field }) => (
+						<TextField
+							{...field}
+							id="bodySize"
+							label="Body size"
+							aria-valuemin={120}
+							type="number"
+							variant="outlined"
+							error={Boolean(errors.bodySize)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+									{"Cm"}
+									</InputAdornment>
+								),
+							}}
+							/>
+							)}
+						/>
+					{errors.bodySize && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.bodySize.message}</span>
+					</Grid>
+					)}						
+					</Grid>
+
+					<Grid item marginY={3} xs={12} md={6}>
+					<Controller
+							name="goalWeight"
+							control={control}
+							render={({ field }) => (
+						<TextField
+							{...field}
+							id="goalWeight"
+							label="Goal weight"
+							type="number"
+							variant="outlined"
+							error={Boolean(errors.goalWeight)}
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+									{"Kg"}
+									</InputAdornment>
+								),
+							}}
+							/>
+							)}
+						/>
+					{errors.goalWeight && (
+					<Grid item xs={12}>
+						<span className="errorText">{errors.goalWeight.message}</span>
+					</Grid>
+					)}						
+					</Grid>
+
+
+					<Grid item xs={12}>
+					<Stack
+						direction="row"
+						spacing={1}
+						justifyContent={'center'}
+						alignItems="center"
+					>
+
+						<Typography color={"black"} variant="h5">Female</Typography>
+						<Switch
+							size="medium"
+							inputProps={{ 'aria-label': 'ant design' }}
+							checked={checkedGender}
+							onChange={handleChangeSwitchGender}
+						/>
+						<Typography color={"black"} variant="h5">Male</Typography>
+
+					</Stack>
+				</Grid>
+
+				
+				<Grid item xs={12}>
+					<Stack
+						direction="row"
+						spacing={1}
+						justifyContent={'center'}
+						alignItems="center"
+					>
+						<Typography color={"black"} variant="h5">{"US/UK measures (Lbs/In)? "}</Typography>
+						<Switch
+							size="medium"
+							inputProps={{ 'aria-label': 'ant design' }}
+							checked={checkedMeasure}
+							onChange={handleChangeSwitchMeasure}
+						/>
+						<Typography color={"black"} variant="h5">{"European measures (Kg/Cm)? "}</Typography>
+					</Stack>
+				</Grid>
+				
 					<Grid item marginY={2} xs={12}>
 						<Button type="submit" variant="contained" color="primary" size="large">
 							Register
