@@ -15,7 +15,7 @@ import './NavbarPublic.css';
 import { useState } from 'react';
 
 export default function Navbar() {
-	const pages = ['Dashboard', 'Weights', 'Contact'];
+	const pages = ['Dashboard', 'Weights', 'Contact', 'Logout'];
 	const settings = ['Dashboard', 'Profile', 'Account', 'Logout'];
 
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -45,7 +45,6 @@ export default function Navbar() {
 							variant="h6"
 							noWrap
 							component="a"
-							href="/"
 							sx={{
 								mr: 5,
 								display: { xs: 'none', md: 'flex' },

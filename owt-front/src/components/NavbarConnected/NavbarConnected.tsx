@@ -13,10 +13,11 @@ import {
 } from '@mui/material';
 import './NavbarConnected.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NavbarConnected() {
 	const pages = ['Dashboard', 'Weights', 'Contact'];
-	const settings = ['Dashboard', 'Profile', 'Account', 'Logout'];
+	const settings = ['Dashboard', 'Weights', 'Contact', 'Logout'];
 
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -44,8 +45,6 @@ export default function NavbarConnected() {
 						<Typography
 							variant="h6"
 							noWrap
-							component="a"
-							href="/"
 							sx={{
 								mr: 5,
 								display: { xs: 'none', md: 'flex' },
@@ -145,7 +144,9 @@ export default function NavbarConnected() {
 							>
 								{settings.map((setting) => (
 									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Typography textAlign="center">{setting}</Typography>
+										<Link to={setting}>
+											<Typography textAlign="center">{setting}</Typography>
+										</Link>
 									</MenuItem>
 								))}
 							</Menu>
