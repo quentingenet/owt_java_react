@@ -5,7 +5,6 @@ import Dashboard from './pages/Dashboard/Dashboard.tsx';
 import Landpage from './pages/Landpage/Landpage.tsx';
 import { Routes, Route } from 'react-router-dom';
 import NavbarConnected from './components/NavbarConnected/NavbarConnected.tsx';
-import NavbarPublic from './components/NavbarPublic/NavbarPublic.tsx';
 import Protected from './routing/Protected.tsx';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
 
 	return (
 		<>
-			{userContext.isUserLoggedIn ? <NavbarConnected /> : <NavbarPublic />}
+			{userContext.isUserLoggedIn && <NavbarConnected />}
 			<Routes>
 				<Route
 					path="/"
@@ -25,7 +24,6 @@ function App() {
 					path="/dashboard"
 					element={<Protected>{userContext.isUserLoggedIn && <Dashboard />}</Protected>}
 				/>
-
 				<Route path="*" element={<NoMatch />} />
 			</Routes>
 		</>

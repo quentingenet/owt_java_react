@@ -96,7 +96,9 @@ export default function NavbarConnected() {
 							>
 								{pages.map((page) => (
 									<MenuItem key={page} onClick={handleCloseNavMenu}>
-										<Typography textAlign="center">{page}</Typography>
+										<Link to={page}>
+											<Typography textAlign="center">{page}</Typography>
+										</Link>
 									</MenuItem>
 								))}
 							</Menu>
@@ -119,6 +121,7 @@ export default function NavbarConnected() {
 						></Typography>
 						<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 							{pages.map((page) => (
+								<Link to={page}>
 								<Button
 									key={page}
 									onClick={handleCloseNavMenu}
@@ -126,6 +129,7 @@ export default function NavbarConnected() {
 								>
 									{page}
 								</Button>
+								</Link>
 							))}
 						</Box>
 
@@ -153,7 +157,7 @@ export default function NavbarConnected() {
 							>
 								{settings.map((setting) => (
 									<MenuItem key={setting} onClick={setting === 'Logout' ? logOut : handleCloseUserMenu}>
-										<Link to={setting === 'Logout' ? '/' : setting}>
+										<Link style={{color:'black', textAlign:'center'}} to={setting === 'Logout' ? '/' : setting}>
 											<Typography textAlign="center">{setting}</Typography>
 										</Link>
 									</MenuItem>

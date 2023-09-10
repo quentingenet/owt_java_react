@@ -1,10 +1,11 @@
 import { ILoginForm } from "../models/ILoginForm";
+import { API_URL } from "../utils/GlobalUtils";
 
 export const login = (data: ILoginForm) => {
   const requestData = { appUsername: data.username, password: data.password };
 
   return new Promise((resolve, reject) => {
-    fetch('http://localhost:7777/api/v1/login', {
+    fetch(API_URL.concat('login'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

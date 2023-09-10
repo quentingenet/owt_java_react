@@ -5,13 +5,14 @@ import Login from '../../components/Login/Login';
 import scale from '../../assets/scale-icon.png';
 //import css
 import './Landpage.css';
+import { Link } from 'react-router-dom';
 export default function Landpage() {
 	const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
 
 	return (
 		<>
-			<Grid container marginTop={6}>
-				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+			<Grid container>
+				<Grid item xs={12}>
 					<div className="titleLandpage">
 						<h1>Open Weight Tracker</h1>
 					</div>
@@ -19,10 +20,6 @@ export default function Landpage() {
 				<Grid
 					item
 					xs={12}
-					sm={12}
-					md={12}
-					lg={12}
-					xl={12}
 					display={'flex'}
 					justifyContent={'center'}
 				>
@@ -35,14 +32,13 @@ export default function Landpage() {
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 					<div className="descriptionLandpage">
 						<p>
-							Open Weight Tracker is an application that allows you to track your
-							weight. It's free and opensource.
+						Open Weight Tracker is an app that lets you track your weight. <br/>It's free and open source.
 							<br />
 							<span className="firstTime">Is it your first time here ?</span>
 						</p>
 					</div>
 				</Grid>
-				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+				<Grid item xs={12}>
 					<Stack
 						direction="row"
 						spacing={1}
@@ -58,8 +54,13 @@ export default function Landpage() {
 						<Typography variant="h5">Register</Typography>
 					</Stack>
 				</Grid>
-				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+				<Grid item xs={12}>
 					{isFirstConnection ? <Register /> : <Login />}
+				</Grid>
+				<Grid xs={12} marginTop={3} justifyContent={'center'} textAlign={'center'}>
+					<Grid item>
+						<Link to='/Contact'>Contact</Link> | <Link to={'https://github.com/quentingenet/owt'}>Git repository</Link> | <Link to={'/Terms'}>Terms and conditions</Link> | <Link to={'https://www.gnu.org/licenses/copyleft.en.html'}>Copyleft</Link>
+					</Grid>
 				</Grid>
 			</Grid>
 		</>
