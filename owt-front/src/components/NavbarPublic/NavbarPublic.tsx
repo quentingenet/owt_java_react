@@ -15,8 +15,8 @@ import './NavbarPublic.css';
 import { useState } from 'react';
 
 export default function Navbar() {
-	const pages = ['Dashboard', 'Weights', 'Contact', 'Logout'];
-	const settings = ['Dashboard', 'Profile', 'Account', 'Logout'];
+	const pages = ['Dashboard', 'Weights', 'Contact'];
+	const settings = ['Dashboard', 'Profile', 'Account'];
 
 	const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 	const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
