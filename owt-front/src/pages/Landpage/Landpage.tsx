@@ -1,14 +1,20 @@
 import { Grid, Stack, Switch, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Register from '../../components/Register/Register';
 import Login from '../../components/Login/Login';
 import scale from '../../assets/scale-icon.png';
 //import css
 import './Landpage.css';
 import { Link } from 'react-router-dom';
+import { useUserContext } from '../../contexts/UserContext';
 export default function Landpage() {
 	const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
-
+	const userContext = useUserContext();
+/*
+	useEffect(()=>{
+		setIsFirstConnection(false)
+		,[userContext.isUserLoggedIn, userContext.isRegistered]})
+*/
 	return (
 		<>
 			<Grid container>
@@ -32,7 +38,7 @@ export default function Landpage() {
 				<Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
 					<div className="descriptionLandpage">
 						<p>
-						Open Weight Tracker is an app that lets you track your weight. <br/>It's free and open source.
+						Track your weight... <br/>It's free and open source
 							<br />
 							<span className="firstTime">Is it your first time here ?</span>
 						</p>

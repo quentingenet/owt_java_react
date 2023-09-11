@@ -43,7 +43,7 @@ export const register = (data: IRegisterForm) => {
                         goalWeight:data.goalWeight};
 
   return new Promise((resolve, reject) => {
-    fetch(API_URL.concat('login'), {
+    fetch(API_URL.concat('users/add'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

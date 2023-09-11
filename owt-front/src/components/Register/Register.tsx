@@ -1,5 +1,5 @@
 import { Person2, VisibilityOff, Visibility, Email, CalendarMonth } from '@mui/icons-material';
-import { Button, Grid, IconButton, InputAdornment, Stack, Switch, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, InputAdornment, Slider, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { IRegisterForm } from '../../models/IRegisterForm';
 import { Controller, useForm } from 'react-hook-form';
@@ -9,12 +9,13 @@ import { passwordAtLeast4, passwordWithLetter, passwordWithNumber } from '../../
 import './Register.css';
 import { useUserContext } from '../../contexts/UserContext';
 import { register as registerService } from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
+import ManIcon from '@mui/icons-material/Man';
+import WomanIcon from '@mui/icons-material/Woman';
 
 export default function Register() {
 
 	const userContext = useUserContext();
-	const navigate = useNavigate();
+
 	const [checkedGender, setCheckedGender] = useState(false);
 	const [checkedMeasure, setCheckedMeasure] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +24,20 @@ export default function Register() {
 		event.preventDefault();
 	};
 	
+	const marksEU = [
+		{
+		value: 50,
+		label: '50 Kg',
+		},
+		{
+		value: 200,
+		label: '200 Kg',
+		},
+	  ];
+	  
+	  function valuetextEU(value: number) {
+		return `${value}Kg`;
+	  }
 
 	const handleChangeSwitchMeasure = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setCheckedMeasure(event.target.checked);
@@ -103,15 +118,10 @@ export default function Register() {
 				registerService(dataRegister).then((response) => {
 					if (response) {
 						userContext.setIsUserLoggedIn(true);
+						//userContext.setIsRegistered(true);
 						let localStorageJwt = localStorage.getItem('jwt') || '';
-						if (
-							localStorageJwt !== null &&
-							localStorageJwt !== '' &&
-							localStorageJwt?.startsWith('Bearer')
-						) {
-							userContext.setJwt(localStorageJwt);
-							navigate('/dashboard');
-						}
+						userContext.setJwt(localStorageJwt);
+						//TODO: redirection vers '/dashboard' si tout est valide et ok.
 					}
 				});
 			} catch (error) {
@@ -123,8 +133,8 @@ export default function Register() {
 	return (
 		<>
 			<Grid container marginTop={3} justifyContent={'center'}>
-				<form onSubmit={handleSubmit(submitRegister)} className="registerFormInput">
-					<Grid item marginY={3} xs={12} md={6}>
+				<form onSubmit={handleSubmit(submitRegister)} className="register-form-input">
+					<Grid item marginY={3} xs={12}>
 						<Controller
 							name="username"
 							control={control}
@@ -153,7 +163,7 @@ export default function Register() {
 						</Grid>
 					)}
 					</Grid>
-					<Grid item marginY={3} xs={12} md={6}>
+					<Grid item marginY={3} xs={12}>
 						<Controller
 							name="emailUser"
 							control={control}
@@ -169,9 +179,7 @@ export default function Register() {
 									InputProps={{
 										endAdornment: (
 											<InputAdornment position="end">
-									
 													<Email />
-										
 											</InputAdornment>
 										),
 									}}
@@ -184,7 +192,7 @@ export default function Register() {
 					</Grid>
 					)}
 					</Grid>
-					<Grid item marginY={3} xs={12} md={6}>
+					<Grid item marginY={3} xs={12}>
 					<Controller
 							name="password"
 							control={control}
@@ -220,7 +228,7 @@ export default function Register() {
 					</Grid>
 					)}						
 					</Grid>
-					<Grid item marginY={3} xs={12} md={6}>
+					<Grid item marginY={3} xs={12}>
 					<Controller
 							name="passwordBis"
 							control={control}
@@ -257,7 +265,7 @@ export default function Register() {
 					)}						
 					</Grid>
 
-					<Grid item marginY={3} xs={12} md={6}>
+					<Grid item marginY={3} xs={12}>
 					<Controller
 							name="yearBirth"
 							control={control}
@@ -267,6 +275,7 @@ export default function Register() {
 							id="yearBirth"
 							label="Year birth"
 							type="number"
+							required
 							variant="outlined"
 							error={Boolean(errors.yearBirth)}
 							InputProps={{
@@ -286,7 +295,7 @@ export default function Register() {
 					)}						
 					</Grid>
 
-					<Grid item marginY={3} xs={12} md={6}>
+					<Grid item marginY={3} xs={12}>
 					<Controller
 							name="bodySize"
 							control={control}
@@ -295,9 +304,9 @@ export default function Register() {
 							{...field}
 							id="bodySize"
 							label="Body size"
-							aria-valuemin={120}
 							type="number"
 							variant="outlined"
+							required
 							error={Boolean(errors.bodySize)}
 							InputProps={{
 								endAdornment: (
@@ -316,74 +325,60 @@ export default function Register() {
 					)}						
 					</Grid>
 
-					<Grid item marginY={3} xs={12} md={6}>
-					<Controller
-							name="goalWeight"
-							control={control}
-							render={({ field }) => (
-						<TextField
-							{...field}
-							id="goalWeight"
-							label="Goal weight"
-							type="number"
-							variant="outlined"
-							error={Boolean(errors.goalWeight)}
-							InputProps={{
-								endAdornment: (
-									<InputAdornment position="end">
-									{"Kg"}
-									</InputAdornment>
-								),
-							}}
-							/>
-							)}
-						/>
-					{errors.goalWeight && (
 					<Grid item xs={12}>
-						<span className="errorText">{errors.goalWeight.message}</span>
+						<Typography color={'#555458'}>Gender</Typography>
 					</Grid>
-					)}						
-					</Grid>
-
-
-					<Grid item xs={12}>
-					<Stack
-						direction="row"
-						spacing={1}
-						justifyContent={'center'}
-						alignItems="center"
-					>
-
-						<Typography color={"black"} variant="h5">Female</Typography>
+					<Grid container justifyContent={"center"} alignItems={"center"} xs={12}>
+						<WomanIcon sx={{color:"black"}} fontSize='large'/>
 						<Switch
 							size="medium"
 							inputProps={{ 'aria-label': 'ant design' }}
 							checked={checkedGender}
 							onChange={handleChangeSwitchGender}
 						/>
-						<Typography color={"black"} variant="h5">Male</Typography>
-
-					</Stack>
-				</Grid>
-
+						<ManIcon sx={{color:"black"}} fontSize='large'/>
+					</Grid>
 				
-				<Grid item xs={12}>
-					<Stack
-						direction="row"
-						spacing={1}
-						justifyContent={'center'}
-						alignItems="center"
-					>
-						<Typography color={"black"} variant="h5">{"US/UK measures (Lbs/In)? "}</Typography>
+				<Grid item xs={12} marginY={2}>
+					<Grid item xs={12}>
+						<Typography color={'#555458'}>Units measurements</Typography>
+					</Grid>
+						<Grid container justifyContent={"center"} alignItems={"center"}>
+						<Typography color={"black"}>{"Lbs/In"}</Typography>
 						<Switch
 							size="medium"
 							inputProps={{ 'aria-label': 'ant design' }}
 							checked={checkedMeasure}
 							onChange={handleChangeSwitchMeasure}
 						/>
-						<Typography color={"black"} variant="h5">{"European measures (Kg/Cm)? "}</Typography>
-					</Stack>
+						<Typography color={"black"}>{"Kg/Cm"}</Typography>
+						</Grid>
 				</Grid>
+
+		
+					<Grid item xs={12}>
+					<Typography color={"#555458"}>{"Goal weight"}</Typography>
+					</Grid>
+					<Grid item xs={12}
+								justifyContent={"center"}
+								alignItems={"center"}
+								paddingX={20}
+								marginTop={4}
+
+						>
+					<Slider
+						aria-label="Always visible"
+						size='medium'
+						defaultValue={85}
+						min={50}
+						max={200}
+						getAriaValueText={valuetextEU}
+						step={1}
+						marks={marksEU}
+						valueLabelDisplay="on"
+						/>
+						</Grid>
+			
 				
 					<Grid item marginY={2} xs={12}>
 						<Button type="submit" variant="contained" color="primary" size="large">
