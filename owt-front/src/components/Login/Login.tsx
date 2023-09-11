@@ -1,9 +1,9 @@
 import {
-	Button,
-	Grid,
-	IconButton,
-	InputAdornment,
-	TextField,
+    Button,
+    Grid,
+    IconButton,
+    InputAdornment,
+    TextField,
 } from '@mui/material';
 import { useState } from 'react';
 import './Login.css';
@@ -17,155 +17,173 @@ import { useUserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-	const userContext = useUserContext();
+    const userContext = useUserContext();
 
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
-	const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-	const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-	const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault();
-	};
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+    };
 
-	const initialValues: ILoginForm = {
-		username: '',
-		password: '',
-	};
+    const initialValues: ILoginForm = {
+        username: '',
+        password: '',
+    };
 
-	const validationSchema = yup.object({
-		username: yup
-			.string()
-			.min(3, 'Username must contain at least 3 characters.')
-			.required('You must enter your username.'),
-		password: yup
-			.string()
-			.min(4, 'Password must contain at least 4 characters.')
-			.required('You must enter your password.'),
-	});
+    const validationSchema = yup.object({
+        username: yup
+            .string()
+            .min(3, 'Username must contain at least 3 characters.')
+            .required('You must enter your username.'),
+        password: yup
+            .string()
+            .min(4, 'Password must contain at least 4 characters.')
+            .required('You must enter your password.'),
+    });
 
-	const {
-		handleSubmit,
-		control,
-		watch,
-		formState: { errors, isValid },
-	} = useForm<ILoginForm>({
-		defaultValues: initialValues,
-		resolver: yupResolver(validationSchema),
-	});
+    const {
+        handleSubmit,
+        control,
+        watch,
+        formState: { errors, isValid },
+    } = useForm<ILoginForm>({
+        defaultValues: initialValues,
+        resolver: yupResolver(validationSchema),
+    });
 
-	let dataLogin: ILoginForm = {
-		username: watch('username'),
-		password: watch('password'),
-	};
+    let dataLogin: ILoginForm = {
+        username: watch('username'),
+        password: watch('password'),
+    };
 
-	const submitLogin = () => {
-		if (isValid) {
-			try {
-				loginService(dataLogin).then((response) => {
-					if (response) {
-						userContext.setIsUserLoggedIn(true);
-						let localStorageJwt = localStorage.getItem('jwt') || '';
-						if (
-							localStorageJwt !== null &&
-							localStorageJwt !== '' &&
-							localStorageJwt?.startsWith('Bearer')
-						) {
-							userContext.setJwt(localStorageJwt);
-							navigate('/dashboard');
-						}
-					}
-				});
-			} catch (error) {
-				console.log('Incomplete form.');
-			}
-		}
-	};
+    const submitLogin = () => {
+        if (isValid) {
+            try {
+                loginService(dataLogin).then((response) => {
+                    if (response) {
+                        userContext.setIsUserLoggedIn(true);
+                        let localStorageJwt = localStorage.getItem('jwt') || '';
+                        if (
+                            localStorageJwt !== null &&
+                            localStorageJwt !== '' &&
+                            localStorageJwt?.startsWith('Bearer')
+                        ) {
+                            userContext.setJwt(localStorageJwt);
+                            navigate('/dashboard');
+                        }
+                    }
+                });
+            } catch (error) {
+                console.log('Incomplete form.');
+            }
+        }
+    };
 
-	return (
-		<>
-			<Grid container marginTop={3} justifyContent={'center'}>
-				<form onSubmit={handleSubmit(submitLogin)} className="loginFormInput">
-					<Grid item xs={12} marginY={3}>
-						<Controller
-							name="username"
-							control={control}
-							defaultValue=""
-							render={({ field }) => (
-								<TextField
-									{...field}
-									id="username"
-									label="Username"
-									type="text"
-									variant="outlined"
-									InputProps={{
-										endAdornment: (
-											<InputAdornment position="end">
-												<IconButton
-													aria-label="toggle password visibility"
-													edge="end"
-												>
-													<Person2 />
-												</IconButton>
-											</InputAdornment>
-										),
-									}}
-								/>
-							)}
-						/>
-						{errors.username && (
-							<Grid item xs={12}>
-								<span className="errorText">{errors.username.message}</span>
-							</Grid>
-						)}
-					</Grid>
-					<Grid item marginY={3} xs={12}>
-						<Controller
-							name="password"
-							control={control}
-							defaultValue=""
-							render={({ field }) => (
-								<TextField
-									{...field}
-									id="password"
-									label="Password"
-									type={showPassword ? 'text' : 'password'}
-									variant="outlined"
-									InputProps={{
-										endAdornment: (
-											<InputAdornment position="end">
-												<IconButton
-													aria-label="toggle password visibility"
-													onClick={handleClickShowPassword}
-													onMouseDown={handleMouseDownPassword}
-													edge="end"
-												>
-													{showPassword ? (
-														<VisibilityOff />
-													) : (
-														<Visibility />
-													)}
-												</IconButton>
-											</InputAdornment>
-										),
-									}}
-								/>
-							)}
-						/>
-						{errors.password && (
-							<Grid item xs={12}>
-								<span className="errorText">{errors.password.message}</span>
-							</Grid>
-						)}
-					</Grid>
-					<Grid item marginY={2} xs={12}>
-						<Button type="submit" variant="contained" color="primary" size="large">
-							Login
-						</Button>
-					</Grid>
-				</form>
-			</Grid>
-		</>
-	);
+    return (
+        <>
+            <Grid container marginTop={3} justifyContent={'center'}>
+                <form
+                    onSubmit={handleSubmit(submitLogin)}
+                    className='loginFormInput'
+                >
+                    <Grid item xs={12} marginY={3}>
+                        <Controller
+                            name='username'
+                            control={control}
+                            defaultValue=''
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    id='username'
+                                    label='Username'
+                                    type='text'
+                                    variant='outlined'
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position='end'>
+                                                <IconButton
+                                                    aria-label='toggle password visibility'
+                                                    edge='end'
+                                                >
+                                                    <Person2 />
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            )}
+                        />
+                        {errors.username && (
+                            <Grid item xs={12}>
+                                <span className='errorText'>
+                                    {errors.username.message}
+                                </span>
+                            </Grid>
+                        )}
+                    </Grid>
+                    <Grid item marginY={3} xs={12}>
+                        <Controller
+                            name='password'
+                            control={control}
+                            defaultValue=''
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    id='password'
+                                    label='Password'
+                                    type={showPassword ? 'text' : 'password'}
+                                    variant='outlined'
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position='end'>
+                                                <IconButton
+                                                    aria-label='toggle password visibility'
+                                                    onClick={
+                                                        handleClickShowPassword
+                                                    }
+                                                    onMouseDown={
+                                                        handleMouseDownPassword
+                                                    }
+                                                    edge='end'
+                                                >
+                                                    {showPassword ? (
+                                                        <VisibilityOff />
+                                                    ) : (
+                                                        <Visibility />
+                                                    )}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            )}
+                        />
+                        {errors.password && (
+                            <Grid item xs={12}>
+                                <span className='errorText'>
+                                    {errors.password.message}
+                                </span>
+                            </Grid>
+                        )}
+                    </Grid>
+                    <Grid item marginY={2} xs={12}>
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                            size='large'
+                        >
+                            Login
+                        </Button>
+                    </Grid>
+                </form>
+            </Grid>
+        </>
+    );
 }

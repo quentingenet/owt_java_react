@@ -8,26 +8,36 @@ import NavbarConnected from './components/NavbarConnected/NavbarConnected.tsx';
 import Protected from './routing/Protected.tsx';
 
 function App() {
-	const userContext = useUserContext();
-	console.log('IS USER LOGGED IN', userContext.isUserLoggedIn);
-	console.log('JWT FROM APP =', userContext.jwt);
+    const userContext = useUserContext();
+    console.log('IS USER LOGGED IN', userContext.isUserLoggedIn);
+    console.log('JWT FROM APP =', userContext.jwt);
 
-	return (
-		<>
-			{userContext.isUserLoggedIn && <NavbarConnected />}
-			<Routes>
-				<Route
-					path="/"
-					element={userContext.isUserLoggedIn ? <Dashboard /> : <Landpage />}
-				/>
-				<Route
-					path="/dashboard"
-					element={<Protected>{userContext.isUserLoggedIn && <Dashboard />}</Protected>}
-				/>
-				<Route path="*" element={<NoMatch />} />
-			</Routes>
-		</>
-	);
+    return (
+        <>
+            {userContext.isUserLoggedIn && <NavbarConnected />}
+            <Routes>
+                <Route
+                    path='/'
+                    element={
+                        userContext.isUserLoggedIn ? (
+                            <Dashboard />
+                        ) : (
+                            <Landpage />
+                        )
+                    }
+                />
+                <Route
+                    path='/dashboard'
+                    element={
+                        <Protected>
+                            {userContext.isUserLoggedIn && <Dashboard />}
+                        </Protected>
+                    }
+                />
+                <Route path='*' element={<NoMatch />} />
+            </Routes>
+        </>
+    );
 }
 
 export default App;

@@ -1,30 +1,31 @@
 :root {
-  font-family: 'Asap Condensed', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.87);
-  background-color:#384454 ;
+    font-family: 'Asap Condensed', Inter, system-ui, Avenir, Helvetica, Arial,
+        sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #384454;
 }
 
 a {
-  font-weight: 500;
-  color: white;
-  text-decoration: none;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
 }
 a:hover {
-  color: white;
+    color: white;
 }
 
 h1 {
-  font-size: 3.5em;
-  line-height: 1.1;
-  font-weight:700;
+    font-size: 3.5em;
+    line-height: 1.1;
+    font-weight: 700;
 }
 
-.errorText{
-  color: #D33030
+.errorText {
+    color: #d33030;
 }
 
 p {
-  font-size: 1.1em;
+    font-size: 1.1em;
 }

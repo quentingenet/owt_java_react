@@ -1,15 +1,15 @@
-.register-form-input{
+.register-form-input {
     height: 100%;
     width: 50%;
-    background-color: #D4D3DC;
+    background-color: #d4d3dc;
     border-radius: 20px;
 }
 
-@media screen and (max-width:768px){
-    .register-form-input{
+@media screen and (max-width: 768px) {
+    .register-form-input {
         height: 100%;
         width: 100%;
-        background-color: #D4D3DC;
+        background-color: #d4d3dc;
         border-radius: 20px;
-    }   
+    }
 }

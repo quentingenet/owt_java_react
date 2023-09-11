@@ -1,4 +1,4 @@
-export interface IRegisterForm{
+export interface IRegisterForm {
     username: string;
     password: string;
     passwordBis: string;
@@ -8,5 +8,4 @@ export interface IRegisterForm{
     isEuropeanUnitMeasure: boolean;
     bodySize: number;
     goalWeight: number;
-
 }

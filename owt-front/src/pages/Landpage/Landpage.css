@@ -1,7 +1,6 @@
-.titleLandpage{
+.titleLandpage {
     text-align: center;
-    color: #D4D3DC;
-
+    color: #d4d3dc;
 }
 
 .descriptionLandpage {
@@ -11,28 +10,28 @@
     margin: 0 auto;
 }
 
-.scaleIcon{
+.scaleIcon {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-width: 15%;
     max-width: 30%;
-    background-color: #1976D2;
-    border-radius: 20px
+    background-color: #1976d2;
+    border-radius: 20px;
 }
 
-span.iconScale{
+span.iconScale {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 18px;
-    color: #D4D3DC;
+    color: #d4d3dc;
     font-weight: bold;
     padding: 3%;
 }
 
-span.firstTime{
+span.firstTime {
     font-weight: bold;
 }
