@@ -13,10 +13,12 @@ import {
 } from '@mui/material';
 import './NavbarConnected.css';
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUserContext } from '../../contexts/UserContext';
 
 export default function NavbarConnected() {
+    const navigate = useNavigate();
+
     const pages = ['Dashboard', 'Weights', 'Contact'];
     const settings = ['Dashboard', 'Weights', 'Contact', 'Logout'];
 
@@ -28,7 +30,7 @@ export default function NavbarConnected() {
     const logOut = () => {
         userContext.setIsUserLoggedIn(false);
         userContext.setJwt('');
-        return <Navigate to='/' replace />;
+        return navigate('/');
     };
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {

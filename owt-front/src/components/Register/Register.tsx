@@ -30,10 +30,11 @@ import { useUserContext } from '../../contexts/UserContext';
 import { register as registerService } from '../../services/UserService';
 import ManIcon from '@mui/icons-material/Man';
 import WomanIcon from '@mui/icons-material/Woman';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const userContext = useUserContext();
-
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (
@@ -132,18 +133,13 @@ export default function Register() {
     };
 
     const submitRegister = (dataRegister: IRegisterForm) => {
-        // TODO:appel POST api to register
         if (isValid) {
             try {
-                registerService(dataRegister).then((response) => {
-                    if (response) {
-                        userContext.setIsUserLoggedIn(true);
-                        //userContext.setIsRegistered(true);
-                        let localStorageJwt = localStorage.getItem('jwt') || '';
-                        userContext.setJwt(localStorageJwt);
-                        //TODO: redirection vers '/dashboard' si tout est valide et ok.
-                    }
-                });
+                registerService(dataRegister);
+                let localStorageJwt = localStorage.getItem('jwt') || '';
+                userContext.setJwt(localStorageJwt);
+                userContext.setIsUserLoggedIn(true);
+                navigate('/dashboard');
             } catch (error) {
                 console.log('Incomplete form.');
             }
@@ -386,8 +382,6 @@ export default function Register() {
                         xs={12}
                     >
                         <WomanIcon sx={{ color: 'black' }} fontSize='large' />
-                        {/*TODO: RECUPERER LES DATAS DES SWITCH
-                        https://react-hook-form.com/docs/usecontroller/controller */}
                         <Controller
                             name='isMale'
                             control={control}
