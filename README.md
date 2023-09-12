@@ -17,7 +17,7 @@ It respect your data, and respect your privacy.
 <br>Concerning front end, application is developed with **React**.
 
 ## How to contribute ?
-There are possible improvements and ideas... <br>
+There are possibilities improvements and ideas... <br>
 Contributions and pull request are welcome ;-) ! 
 
 ## Author
