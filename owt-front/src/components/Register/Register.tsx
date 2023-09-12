@@ -6,13 +6,11 @@ import {
     CalendarMonth,
 } from '@mui/icons-material';
 import {
-    Box,
     Button,
     Grid,
     IconButton,
     InputAdornment,
     Slider,
-    Stack,
     Switch,
     TextField,
     Typography,
@@ -36,8 +34,6 @@ import WomanIcon from '@mui/icons-material/Woman';
 export default function Register() {
     const userContext = useUserContext();
 
-    const [checkedGender, setCheckedGender] = useState(false);
-    const [checkedMeasure, setCheckedMeasure] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (
@@ -61,24 +57,14 @@ export default function Register() {
         return `${value}Kg`;
     }
 
-    const handleChangeSwitchMeasure = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setCheckedMeasure(event.target.checked);
-    };
-    const handleChangeSwitchGender = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setCheckedGender(event.target.checked);
-    };
     const initialValues: IRegisterForm = {
         username: '',
         password: '',
         passwordBis: '',
         emailUser: '',
         yearBirth: 0,
-        isMale: true,
-        isEuropeanUnitMeasure: true,
+        isMale: false,
+        isEuropeanUnitMeasure: false,
         bodySize: 0,
         goalWeight: 0,
     };
@@ -400,11 +386,21 @@ export default function Register() {
                         xs={12}
                     >
                         <WomanIcon sx={{ color: 'black' }} fontSize='large' />
-                        <Switch
-                            size='medium'
-                            inputProps={{ 'aria-label': 'ant design' }}
-                            checked={checkedGender}
-                            onChange={handleChangeSwitchGender}
+                        {/*TODO: RECUPERER LES DATAS DES SWITCH
+                        https://react-hook-form.com/docs/usecontroller/controller */}
+                        <Controller
+                            name='isMale'
+                            control={control}
+                            defaultValue={false}
+                            render={({ field }) => (
+                                <Switch
+                                    {...field}
+                                    id='isMale'
+                                    size='medium'
+                                    inputProps={{ 'aria-label': 'ant design' }}
+                                    checked={watch('isMale')}
+                                />
+                            )}
                         />
                         <ManIcon sx={{ color: 'black' }} fontSize='large' />
                     </Grid>
@@ -421,12 +417,22 @@ export default function Register() {
                             alignItems={'center'}
                         >
                             <Typography color={'black'}>{'Lbs/In'}</Typography>
-                            <Switch
-                                size='medium'
-                                inputProps={{ 'aria-label': 'ant design' }}
-                                checked={checkedMeasure}
-                                onChange={handleChangeSwitchMeasure}
+                            <Controller
+                                name='isEuropeanUnitMeasure'
+                                control={control}
+                                defaultValue={false}
+                                render={({ field }) => (
+                                    <Switch
+                                        {...field}
+                                        size='medium'
+                                        inputProps={{
+                                            'aria-label': 'ant design',
+                                        }}
+                                        checked={watch('isEuropeanUnitMeasure')}
+                                    />
+                                )}
                             />
+
                             <Typography color={'black'}>{'Kg/Cm'}</Typography>
                         </Grid>
                     </Grid>
@@ -444,16 +450,24 @@ export default function Register() {
                         paddingX={20}
                         marginTop={4}
                     >
-                        <Slider
-                            aria-label='Always visible'
-                            size='medium'
-                            defaultValue={85}
-                            min={50}
-                            max={200}
-                            getAriaValueText={valuetextEU}
-                            step={1}
-                            marks={marksEU}
-                            valueLabelDisplay='on'
+                        <Controller
+                            name='goalWeight'
+                            control={control}
+                            render={({ field }) => (
+                                <Slider
+                                    {...field}
+                                    aria-label='Always visible'
+                                    size='medium'
+                                    defaultValue={85}
+                                    min={50}
+                                    max={200}
+                                    getAriaValueText={valuetextEU}
+                                    step={1}
+                                    value={watch('goalWeight')}
+                                    marks={marksEU}
+                                    valueLabelDisplay='on'
+                                />
+                            )}
                         />
                     </Grid>
 
