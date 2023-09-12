@@ -15,4 +15,12 @@ It respect your data, and respect your privacy.
 
 **OWT** is developed, for the backend, in **Java(JDK17)** with the **framework Spring** with Spring Boot, Data/JPA, and Spring Security.
 <br>Concerning front end, application is developed with **React**.
+
+## How to contribute ?
+There are possible improvements and ideas... <br>
+Contributions and pull request are welcome ;-) ! 
+
+## Author
+* Quentin GENET
+
 ![OWT preview](https://github.com/quentingenet/owt/blob/main/owt_preview.png)
