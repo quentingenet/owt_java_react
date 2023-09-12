@@ -4,6 +4,7 @@ import {
     IconButton,
     InputAdornment,
     TextField,
+    Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import './Login.css';
@@ -20,7 +21,7 @@ export default function Login() {
     const userContext = useUserContext();
 
     const navigate = useNavigate();
-
+    const [forgotPassword, setForgotPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -172,15 +173,69 @@ export default function Login() {
                             </Grid>
                         )}
                     </Grid>
-                    <Grid item marginY={2} xs={12}>
-                        <Button
-                            type='submit'
-                            variant='contained'
-                            color='primary'
-                            size='large'
+                    <Grid
+                        item
+                        marginY={2}
+                        xs={12}
+                        justifyContent={'center'}
+                        flexDirection={'column'}
+                        alignItems={'center'}
+                    >
+                        <Grid item marginBottom={2}>
+                            <Button
+                                type='submit'
+                                variant='contained'
+                                color='primary'
+                                size='large'
+                                disabled={forgotPassword ? true : false}
+                            >
+                                Login
+                            </Button>
+                        </Grid>
+                        <span
+                            className='forgot-password'
+                            onClick={() => setForgotPassword(!forgotPassword)}
                         >
-                            Login
-                        </Button>
+                            Forgot password ?
+                        </span>
+                        {forgotPassword && (
+                            <Grid
+                                container
+                                xs={12}
+                                justifyContent={'center'}
+                                flexDirection={'column'}
+                            >
+                                <Grid item marginTop={2}>
+                                    <Controller
+                                        name='password'
+                                        control={control}
+                                        defaultValue=''
+                                        render={({ field }) => (
+                                            <TextField
+                                                {...field}
+                                                id='recoveryEmail'
+                                                label='Recovery email'
+                                                variant='outlined'
+                                            />
+                                        )}
+                                    />
+                                </Grid>
+                                <Grid item marginY={2}>
+                                    <Button
+                                        variant='contained'
+                                        color='primary'
+                                        size='large'
+                                        onClick={() => {
+                                            //TODO: appel du backend pour reset le mot de passe + page reset password
+                                            setForgotPassword(false);
+                                            navigate('/reset-password');
+                                        }}
+                                    >
+                                        SEND RECOVERY EMAIL
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        )}
                     </Grid>
                 </form>
             </Grid>

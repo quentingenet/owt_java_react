@@ -9,8 +9,6 @@ import Protected from './routing/Protected.tsx';
 
 function App() {
     const userContext = useUserContext();
-    console.log('IS USER LOGGED IN', userContext.isUserLoggedIn);
-    console.log('JWT FROM APP =', userContext.jwt);
 
     return (
         <>
