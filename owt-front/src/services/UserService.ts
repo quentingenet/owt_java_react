@@ -59,7 +59,7 @@ export const register = (data: IRegisterForm) => {
                     if (localStorage.getItem('jwt')) {
                         localStorage.removeItem('jwt');
                     }
-                    localStorage.setItem('jwt', jwt);
+                    localStorage.setItem('jwt',JSON.stringify(jwt));
                     resolve(response.json());
                 } else {
                     throw new Error("Erreur lors de la requête à l'API");
