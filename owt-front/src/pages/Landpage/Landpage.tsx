@@ -6,15 +6,9 @@ import scale from '../../assets/scale-icon.png';
 //import css
 import './Landpage.css';
 import { Link } from 'react-router-dom';
-import { useUserContext } from '../../contexts/UserContext';
 export default function Landpage() {
     const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
-    const userContext = useUserContext();
-    /*
-	useEffect(()=>{
-		setIsFirstConnection(false)
-		,[userContext.isUserLoggedIn, userContext.isRegistered]})
-*/
+    
     return (
         <>
             <Grid container>

@@ -136,7 +136,7 @@ export default function Register() {
         if (isValid) {
             try {
                 registerService(dataRegister);
-                let localStorageJwt = localStorage.getItem('jwt') || '';
+                const localStorageJwt = localStorage.getItem('jwt') || '';
                 userContext.setJwt(localStorageJwt);
                 userContext.setIsUserLoggedIn(true);
                 navigate('/dashboard');

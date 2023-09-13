@@ -5,16 +5,13 @@ interface IUserContext {
 	setJwt: (jwt: string) => void;
 	isUserLoggedIn: boolean;
 	setIsUserLoggedIn: (isUserLoggedIn: boolean) => void;
-	isRegistered: boolean;
-	setIsRegistered: (isRegistered: boolean)=> void;
 }
+
 export const UserContext = createContext<IUserContext>({
 	jwt: '',
-	setJwt: () => {},
+	setJwt: () => {''},
 	isUserLoggedIn: false,
-	setIsUserLoggedIn: () => {},
-	isRegistered: false,
-	setIsRegistered: ()=>{}
+	setIsUserLoggedIn: () => {''},
 });
 
 export function useUserContext() {
@@ -24,15 +21,12 @@ export function useUserContext() {
 export function UserContextProvider({ children }: { children: React.ReactNode }) {
 	const [jwt, setJwt] = useState<string>('');
 	const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
-	const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
 	const value: IUserContext = {
 		jwt: jwt,
 		setJwt: setJwt,
 		isUserLoggedIn: isUserLoggedIn,
 		setIsUserLoggedIn: setIsUserLoggedIn,
-		isRegistered: isRegistered,
-		setIsRegistered: setIsRegistered
 	};
 
 	return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

@@ -4,7 +4,6 @@ import {
     IconButton,
     InputAdornment,
     TextField,
-    Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import './Login.css';
@@ -58,7 +57,7 @@ export default function Login() {
         resolver: yupResolver(validationSchema),
     });
 
-    let dataLogin: ILoginForm = {
+    const dataLogin: ILoginForm = {
         username: watch('username'),
         password: watch('password'),
     };
@@ -69,7 +68,7 @@ export default function Login() {
                 loginService(dataLogin).then((response) => {
                     if (response) {
                         userContext.setIsUserLoggedIn(true);
-                        let localStorageJwt = localStorage.getItem('jwt') || '';
+                        const localStorageJwt = localStorage.getItem('jwt') || '';
                         if (
                             localStorageJwt !== null &&
                             localStorageJwt !== '' &&
