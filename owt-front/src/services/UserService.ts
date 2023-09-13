@@ -20,7 +20,7 @@ export const login = (data: ILoginForm) => {
                     if (localStorage.getItem('jwt')) {
                         localStorage.removeItem('jwt');
                     }
-                    localStorage.setItem('jwt', jwt);
+                    localStorage.setItem('jwt', JSON.stringify(jwt));//a voir si .stringify() résoud le pmessage d'erreur en console.
                     resolve(response.json());
                 } else {
                     throw new Error("Erreur lors de la requête à l'API");
