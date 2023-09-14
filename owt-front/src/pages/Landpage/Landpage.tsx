@@ -1,5 +1,5 @@
 import { Grid, Stack, Switch, Typography } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Register from '../../components/Register/Register';
 import Login from '../../components/Login/Login';
 import scale from '../../assets/scale-icon.png';
@@ -8,7 +8,7 @@ import './Landpage.css';
 import { Link } from 'react-router-dom';
 export default function Landpage() {
     const [isFirstConnection, setIsFirstConnection] = useState<boolean>(false);
-    
+
     return (
         <>
             <Grid container>

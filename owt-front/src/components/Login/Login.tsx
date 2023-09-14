@@ -22,7 +22,6 @@ export default function Login() {
     const navigate = useNavigate();
     const [forgotPassword, setForgotPassword] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (
@@ -68,7 +67,8 @@ export default function Login() {
                 loginService(dataLogin).then((response) => {
                     if (response) {
                         userContext.setIsUserLoggedIn(true);
-                        const localStorageJwt = localStorage.getItem('jwt') || '';
+                        const localStorageJwt =
+                            localStorage.getItem('jwt') || '';
                         if (
                             localStorageJwt !== null &&
                             localStorageJwt !== '' &&
