@@ -132,7 +132,7 @@ export default function Register() {
         goalWeight: watch('goalWeight'),
     };
 
-    const submitRegister = (dataRegister: IRegisterForm) => {
+    const submitRegister = () => {
         if (isValid) {
             try {
                 registerService(dataRegister);
