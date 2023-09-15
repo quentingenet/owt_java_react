@@ -6,6 +6,9 @@ import Landpage from './pages/Landpage/Landpage.tsx';
 import { Routes, Route } from 'react-router-dom';
 import NavbarConnected from './components/NavbarConnected/NavbarConnected.tsx';
 import Protected from './routing/Protected.tsx';
+import Weights from './pages/Weights/Weights.tsx';
+import Profile from './pages/Profile/Profile.tsx';
+import Contact from './pages/Contact/Contact.tsx';
 
 function App() {
     const userContext = useUserContext();
@@ -28,10 +31,32 @@ function App() {
                     path='/dashboard'
                     element={
                         <Protected>
-                            {userContext.isUserLoggedIn && <Dashboard />}
+                            <Dashboard />
                         </Protected>
                     }
                 />
+                <Route
+                    path='/weights'
+                    element={
+                        <Protected>
+                           <Weights />
+                        </Protected>
+                    }
+                />
+                <Route
+                    path='/profile'
+                    element={
+                        <Protected>
+                           <Profile />
+                        </Protected>
+                    }
+                />
+                <Route
+                    path='/contact'
+                    element={
+                           <Contact />
+                    }
+                />                                                          
                 <Route path='*' element={<NoMatch />} />
             </Routes>
         </>
