@@ -19,6 +19,12 @@ It respect your data, and respect your privacy.
 ## How to contribute ?
 There are possibilities improvements and ideas... <br>
 Contributions and pull request are welcome ;-) ! 
+<br>
+Nobody should be restricted by the software they use. There are four freedoms that every user should have:
+- the freedom to use the software for any purpose,
+- the freedom to change the software to suit your needs,
+- the freedom to share the software with your friends and neighbors, and
+- the freedom to share the changes you make.
 
 ## Author
 * Quentin GENET
