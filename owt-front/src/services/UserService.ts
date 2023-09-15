@@ -3,7 +3,7 @@ import { IRegisterForm } from '../models/IRegisterForm';
 import { API_URL } from '../utils/GlobalUtils';
 
 export const login = (data: ILoginForm) => {
-    const requestData = { appUsername: data.username, password: data.password };
+    const requestDataLogin = { appUsername: data.username, password: data.password };
 
     return new Promise((resolve, reject) => {
         fetch(API_URL.concat('login'), {
@@ -11,7 +11,7 @@ export const login = (data: ILoginForm) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestData),
+            body: JSON.stringify(requestDataLogin),
         })
             .then((response) => {
                 if (response.ok) {
@@ -32,16 +32,16 @@ export const login = (data: ILoginForm) => {
     });
 };
 
-export const register = (data: IRegisterForm) => {
-    const requestData = {
-        appUsername: data.username,
-        password: data.password,
-        emailUser: data.emailUser,
-        yearBirth: data.yearBirth,
-        isMale: data.isMale,
-        isEuropeanUnitMeasure: data.isEuropeanUnitMeasure,
-        bodySize: data.bodySize,
-        goalWeight: data.goalWeight,
+export const register = (dataRegister: IRegisterForm) => {
+    const requestDataRegister = {
+        appUsername: dataRegister.username,
+        password: dataRegister.password,
+        emailUser: dataRegister.emailUser,
+        yearBirth: dataRegister.yearBirth,
+        isMale: dataRegister.isMale,
+        isEuropeanUnitMeasure: dataRegister.isEuropeanUnitMeasure,
+        bodySize: dataRegister.bodySize,
+        goalWeight: dataRegister.goalWeight,
     };
 
     return new Promise((resolve, reject) => {
@@ -50,7 +50,7 @@ export const register = (data: IRegisterForm) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestData),
+            body: JSON.stringify(requestDataRegister),
         })
             .then((response) => {
                 if (response.ok) {

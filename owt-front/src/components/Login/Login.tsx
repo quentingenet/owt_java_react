@@ -20,8 +20,8 @@ export default function Login() {
     const userContext = useUserContext();
 
     const navigate = useNavigate();
-    const [forgotPassword, setForgotPassword] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
+    const [forgotPassword, setForgotPassword] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (
