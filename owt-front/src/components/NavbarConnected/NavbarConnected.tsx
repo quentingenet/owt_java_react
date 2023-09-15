@@ -28,8 +28,8 @@ export default function NavbarConnected() {
     const userContext = useUserContext();
 
     const logOut = () => {
-        userContext.setIsUserLoggedIn(false);
         userContext.setJwt('');
+        userContext.setIsUserLoggedIn(false);
         return navigate('/');
     };
 
@@ -66,7 +66,7 @@ export default function NavbarConnected() {
                                 textDecoration: 'none',
                             }}
                         >
-                            Open Weight Tracker CONNECTED
+                            Open Weight Tracker
                         </Typography>
 
                         <Box
@@ -160,7 +160,7 @@ export default function NavbarConnected() {
                                     onClick={handleOpenUserMenu}
                                     sx={{ p: 0 }}
                                 >
-                                    <Avatar alt='Quentin' src='' />
+                                    <Avatar alt='UserAvatar' src='' />
                                 </IconButton>
                             </Tooltip>
                             <Menu

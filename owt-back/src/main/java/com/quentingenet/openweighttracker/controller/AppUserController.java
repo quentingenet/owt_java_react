@@ -80,7 +80,7 @@ public class AppUserController {
 			return new ResponseEntity<>("User already existing", HttpStatus.BAD_REQUEST);
 		}
 		appUserServiceImpl.saveNewPerson(personToSaveDto);
-		logger.info("NEW USER CREATED IN DATABASE");
+		logger.info("NEW USER : {}  --> CREATED IN DATABASE", personToSaveDto.getAppUsername());
 
 		Authentication authentication = jwtController.logUser(personToSaveDto.getAppUsername().replaceAll("\\s+",""), personToSaveDto.getPassword().replaceAll("\\s+",""));
 		String jwt = jwtUtils.generateToken(authentication);
@@ -166,7 +166,7 @@ public class AppUserController {
 				String requestFormatted = request.getRequestURL().toString().replace("/users/resetPassword", "");
 				SimpleMailMessage mailToSend = passwordResetTokenService.constructResetTokenEmail(requestFormatted, token, appUser);
 				mailSender.send(mailToSend);
-				logger.info("MAIL IS SENT");
+				logger.info("MAIL IS SENT TO : {}", emailUser);
 				return ResponseEntity.ok().build();}
 		} else {
 			return ResponseEntity.notFound().build();
