@@ -1,3 +1,4 @@
+import { IChangeResetPassword } from '../models/IChangeResetPassword';
 import { ILoginForm } from '../models/ILoginForm';
 import { IRegisterForm } from '../models/IRegisterForm';
 import { API_URL } from '../utils/GlobalUtils';
@@ -20,7 +21,7 @@ export const login = (data: ILoginForm) => {
                     if (localStorage.getItem('jwt')) {
                         localStorage.removeItem('jwt');
                     }
-                    localStorage.setItem('jwt', JSON.stringify(jwt));//a voir si .stringify() résoud le pmessage d'erreur en console.
+                    localStorage.setItem('jwt', JSON.stringify(jwt));
                     resolve(response.json());
                 } else {
                     throw new Error("Erreur lors de la requête à l'API");
@@ -70,3 +71,18 @@ export const register = (dataRegister: IRegisterForm) => {
             });
     });
 };
+
+export const resetAndChangePassword = (emailResetPassword : string) => {
+    const requestDataResetChangePassword = {
+        emailUser: emailResetPassword
+    }
+    return  fetch(API_URL.concat('/resetPassword'), {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            //TODO: ajouter le Jwt
+        },
+        body: JSON.stringify(requestDataResetChangePassword)
+    }
+    )
+}
