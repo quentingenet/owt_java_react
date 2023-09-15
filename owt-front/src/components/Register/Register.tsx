@@ -35,7 +35,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
     const userContext = useUserContext();
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
