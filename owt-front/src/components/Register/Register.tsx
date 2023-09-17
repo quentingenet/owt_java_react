@@ -152,11 +152,15 @@ export default function Register() {
     const submitRegister = () => {
         if (isValid) {
             try {
-                registerService(dataRegister);
-                const localStorageJwt = localStorage.getItem('jwt') || '';
-                userContext.setJwt(localStorageJwt);
-                userContext.setIsUserLoggedIn(true);
-                navigate('/dashboard');
+                registerService(dataRegister).then((response) => {
+                    if (response) {
+                        const localStorageJwt =
+                            localStorage.getItem('jwt') || '';
+                        userContext.setJwt(localStorageJwt);
+                        userContext.setIsUserLoggedIn(true);
+                        navigate('/dashboard');
+                    }
+                });
             } catch (error) {
                 console.log('Incomplete form.');
             }
@@ -483,6 +487,7 @@ export default function Register() {
                         container
                         justifyContent={'center'}
                         alignItems={'center'}
+                        marginTop={3}
                     >
                         <Grid
                             item
@@ -506,7 +511,7 @@ export default function Register() {
                                 </Link>
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sx={{ color: 'black' }}>
+                        <Grid item xs={12} my={3} sx={{ color: 'black' }}>
                             <Controller
                                 name='isAcceptedTerms'
                                 control={control}
