@@ -58,6 +58,7 @@ export default function Landpage() {
                     {isFirstConnection ? <Register /> : <Login />}
                 </Grid>
                 <Grid
+                    item
                     xs={12}
                     marginTop={3}
                     justifyContent={'center'}

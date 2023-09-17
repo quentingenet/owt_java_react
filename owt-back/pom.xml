@@ -8,8 +8,8 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.quentingenet</groupId>
-	<artifactId>openweighttracker</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>owt-api</artifactId>
+	<version>1.0.0</version>
 	<name>openweighttracker</name>
 	<packaging>jar</packaging>
 	<description>Free and open-source personal weight tracker</description>
