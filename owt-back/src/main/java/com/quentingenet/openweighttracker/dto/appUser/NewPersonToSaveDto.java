@@ -4,6 +4,7 @@ public class NewPersonToSaveDto {
 	// INITIAL DATA
 	private Boolean isEuropeanUnitMeasure;
 
+	private Boolean isAcceptedTerms;
 	private Double goalWeight;
 
 	private Double bodySize;
@@ -85,4 +86,10 @@ public class NewPersonToSaveDto {
 		this.emailUser = emailUser;
 	}
 
+	public Boolean getAcceptedTerms() {
+		return isAcceptedTerms;
+	}
+	public void setAcceptedTerms(Boolean acceptedTerms) {
+		isAcceptedTerms = acceptedTerms;
+	}
 }

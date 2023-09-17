@@ -9,6 +9,7 @@ import Protected from './routing/Protected.tsx';
 import Weights from './pages/Weights/Weights.tsx';
 import Profile from './pages/Profile/Profile.tsx';
 import Contact from './pages/Contact/Contact.tsx';
+import Terms from './pages/Terms/Terms.tsx';
 
 function App() {
     const userContext = useUserContext();
@@ -39,7 +40,7 @@ function App() {
                     path='/weights'
                     element={
                         <Protected>
-                           <Weights />
+                            <Weights />
                         </Protected>
                     }
                 />
@@ -47,16 +48,12 @@ function App() {
                     path='/profile'
                     element={
                         <Protected>
-                           <Profile />
+                            <Profile />
                         </Protected>
                     }
                 />
-                <Route
-                    path='/contact'
-                    element={
-                           <Contact />
-                    }
-                />                                                          
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/owt-terms-and-conditions' element={<Terms />} />
                 <Route path='*' element={<NoMatch />} />
             </Routes>
         </>

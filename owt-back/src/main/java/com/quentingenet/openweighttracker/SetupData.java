@@ -82,6 +82,7 @@ public class SetupData implements CommandLineRunner {
       initialDataEntity.setIsEuropeanUnitMeasure(true);
       initialDataEntity.setBodySize(184d);
       initialDataEntity.setIsMale(true);
+      initialDataEntity.setAcceptedTerms(true);
 
       initialDataRepository.save(initialDataEntity);
 
