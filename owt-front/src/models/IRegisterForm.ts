@@ -8,4 +8,5 @@ export interface IRegisterForm {
     isEuropeanUnitMeasure: boolean;
     bodySize: number;
     goalWeight: number;
+    isAcceptedTerms: boolean;
 }

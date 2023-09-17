@@ -9,12 +9,11 @@ import ManIcon from '@mui/icons-material/Man';
 import WomanIcon from '@mui/icons-material/Woman';
 import {
     Button,
+    Checkbox,
+    FormControlLabel,
     Grid,
     IconButton,
     InputAdornment,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
     Slider,
     Switch,
     TextField,
@@ -33,13 +32,12 @@ import {
 import './Register.css';
 import { useUserContext } from '../../contexts/UserContext';
 import { register as registerService } from '../../services/UserService';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const userContext = useUserContext();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [gender, setGender] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
@@ -70,61 +68,61 @@ export default function Register() {
         passwordBis: '',
         emailUser: '',
         yearBirth: 1990,
-        isMale: gender,
+        isMale: false,
         isEuropeanUnitMeasure: false,
         bodySize: 175,
         goalWeight: 80,
+        isAcceptedTerms: false,
     };
 
     const validationSchema = yup.object({
         username: yup
             .string()
-            .min(3, 'Username must contain at least 3 characters.')
-            .required('Enter your pseudonyme.'),
+            .min(3, 'Username must contain at least 3 characters')
+            .required('Enter your pseudonyme'),
         yearBirth: yup
             .number()
             .positive('Must be a positive number')
             .integer('Must be a correct number')
             .min(1900, 'Birth year must be greater than 1900')
             .max(currentYear, 'Birth year must be less')
-            .required('Enter your year of birth.'),
+            .required('Enter your year of birth'),
         emailUser: yup
             .string()
-            .required('Enter your email address.')
-            .email('Your email address is not valid.'),
-        isMale: yup.boolean().required('Select your gender.'),
-        isEuropeanUnitMeasure: yup
-            .boolean()
-            .required('Select an unit measure.'),
+            .required('Enter your email address')
+            .email('Your email address is not valid'),
+        isMale: yup.boolean().required('Select your gender'),
+        isAcceptedTerms: yup.boolean().required('You must accept terms'),
+        isEuropeanUnitMeasure: yup.boolean().required('Select an unit measure'),
         bodySize: yup
             .number()
             .positive()
             .integer()
             .min(100)
             .max(250)
-            .required('Enter your body size.'),
-        goalWeight: yup.number().required('Enter a goal weight.'),
+            .required('Enter your body size'),
+        goalWeight: yup.number().required('Enter a goal weight'),
         password: yup
             .string()
             .required('Enter your password.')
-            .matches(passwordWithLetter, 'Your password must contain a letter.')
-            .matches(passwordWithNumber, 'Your password must contain a number.')
+            .matches(passwordWithLetter, 'Your password must contain a letter')
+            .matches(passwordWithNumber, 'Your password must contain a number')
             .matches(
                 passwordAtLeast4,
-                'Your password must contain at least 4 characters.'
+                'Your password must contain at least 4 characters'
             ),
         passwordBis: yup
             .string()
             .required('Enter your password.')
-            .matches(passwordWithLetter, 'Your password must contain a letter.')
-            .matches(passwordWithNumber, 'Your password must contain a number.')
+            .matches(passwordWithLetter, 'Your password must contain a letter')
+            .matches(passwordWithNumber, 'Your password must contain a number')
             .matches(
                 passwordAtLeast4,
-                'Your password must contain at least 4 characters.'
+                'Your password must contain at least 4 characters'
             )
             .oneOf(
                 [yup.ref('password'), ''],
-                'The password confirmation must correspond to the chosen password.'
+                'The password confirmation must correspond to the chosen password'
             ),
     });
 
@@ -148,6 +146,7 @@ export default function Register() {
         isEuropeanUnitMeasure: watch('isEuropeanUnitMeasure'),
         bodySize: watch('bodySize'),
         goalWeight: watch('goalWeight'),
+        isAcceptedTerms: watch('isAcceptedTerms'),
     };
 
     const submitRegister = () => {
@@ -480,7 +479,54 @@ export default function Register() {
                             )}
                         />
                     </Grid>
-
+                    <Grid
+                        container
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                    >
+                        <Grid
+                            item
+                            justifyContent={'center'}
+                            sx={{ color: 'black', fontSize: '0.8em' }}
+                        >
+                            <Typography>
+                                I confirm to have read, understand and accepted
+                            </Typography>
+                            <Typography>
+                                <Link
+                                    style={{
+                                        color: 'black',
+                                        fontWeight: 'bold',
+                                    }}
+                                    to={'/owt-terms-and-conditions'}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    Terms and conditions
+                                </Link>
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{ color: 'black' }}>
+                            <Controller
+                                name='isAcceptedTerms'
+                                control={control}
+                                defaultValue={false}
+                                render={({ field }) => (
+                                    <FormControlLabel
+                                        {...field}
+                                        required={
+                                            watch('isAcceptedTerms')
+                                                ? false
+                                                : true
+                                        }
+                                        label={'I agree'}
+                                        value={true}
+                                        control={<Checkbox />}
+                                    />
+                                )}
+                            />
+                        </Grid>
+                    </Grid>
                     <Grid item marginY={2} xs={12}>
                         <Button
                             type='submit'

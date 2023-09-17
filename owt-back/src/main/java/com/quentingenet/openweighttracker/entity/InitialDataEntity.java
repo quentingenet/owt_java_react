@@ -35,6 +35,8 @@ public class InitialDataEntity implements Serializable {
 	@Column(name = "is_european_unit_measure", nullable = false)
 	private Boolean isEuropeanUnitMeasure;
 	// kg = lbs(pounds) cm = inch metre = feet
+	@Column(name = "is_accepted_terms", nullable = false)
+	private Boolean isAcceptedTerms;
 
 	@Min(1900)
 	@Max(2022)
@@ -100,4 +102,11 @@ public class InitialDataEntity implements Serializable {
 		this.isEuropeanUnitMeasure = isEuropeanUnitMeasure;
 	}
 
+	public Boolean getAcceptedTerms() {
+		return isAcceptedTerms;
+	}
+
+	public void setAcceptedTerms(Boolean acceptedTerms) {
+		isAcceptedTerms = acceptedTerms;
+	}
 }

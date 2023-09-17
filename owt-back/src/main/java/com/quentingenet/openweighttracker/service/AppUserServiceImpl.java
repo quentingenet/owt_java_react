@@ -76,6 +76,7 @@ public class AppUserServiceImpl implements AppUserService {
 		initialDataEntity.setIsMale(personToSaveDto.getIsMale());
 		initialDataEntity.setIsEuropeanUnitMeasure(personToSaveDto.getIsEuropeanUnitMeasure());
 		initialDataEntity.setYearBirth(personToSaveDto.getYearBirth());
+		initialDataEntity.setAcceptedTerms(personToSaveDto.getAcceptedTerms());
 
 		personEntityToSave.setAppUserPerson(appUserEntity);
 		personEntityToSave.setUserInitData(initialDataEntity);

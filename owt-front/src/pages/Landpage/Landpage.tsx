@@ -66,12 +66,26 @@ export default function Landpage() {
                 >
                     <Grid item>
                         <Link to='/Contact'>Contact</Link> |{' '}
-                        <Link to={'https://github.com/quentingenet/owt'}>
+                        <Link
+                            to={'https://github.com/quentingenet/owt'}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
                             Git repository
                         </Link>{' '}
-                        | <Link to={'/Terms'}>Terms and conditions</Link> |{' '}
+                        |{' '}
+                        <Link
+                            to={'/owt-terms-and-conditions'}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
+                            Terms and conditions
+                        </Link>{' '}
+                        |{' '}
                         <Link
                             to={'https://www.gnu.org/licenses/copyleft.en.html'}
+                            target='_blank'
+                            rel='noopener noreferrer'
                         >
                             Copyleft
                         </Link>
