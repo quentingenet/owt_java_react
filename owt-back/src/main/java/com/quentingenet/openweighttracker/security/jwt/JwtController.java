@@ -44,6 +44,7 @@ public class JwtController {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(AUTHORIZATION_HEADER, "Bearer " + jwt);
 		httpHeaders.setAccessControlAllowHeaders(Collections.singletonList("Authorization"));
+		logger.info("USER : {} IS LOGGED", ((User) principal).getUsername());
 		return new ResponseEntity<>(new JwtResponse(((User) principal).getUsername()), httpHeaders, HttpStatus.OK);
 	}
 

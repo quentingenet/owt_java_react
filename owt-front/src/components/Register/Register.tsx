@@ -5,11 +5,16 @@ import {
     Email,
     CalendarMonth,
 } from '@mui/icons-material';
+import ManIcon from '@mui/icons-material/Man';
+import WomanIcon from '@mui/icons-material/Woman';
 import {
     Button,
     Grid,
     IconButton,
     InputAdornment,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
     Slider,
     Switch,
     TextField,
@@ -28,20 +33,21 @@ import {
 import './Register.css';
 import { useUserContext } from '../../contexts/UserContext';
 import { register as registerService } from '../../services/UserService';
-import ManIcon from '@mui/icons-material/Man';
-import WomanIcon from '@mui/icons-material/Woman';
 import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const userContext = useUserContext();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [gender, setGender] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.preventDefault();
     };
+
+    const currentYear = new Date().getFullYear();
 
     const marksEU = [
         {
@@ -63,32 +69,44 @@ export default function Register() {
         password: '',
         passwordBis: '',
         emailUser: '',
-        yearBirth: 0,
-        isMale: false,
+        yearBirth: 1990,
+        isMale: gender,
         isEuropeanUnitMeasure: false,
-        bodySize: 0,
-        goalWeight: 0,
+        bodySize: 175,
+        goalWeight: 80,
     };
 
     const validationSchema = yup.object({
         username: yup
             .string()
             .min(3, 'Username must contain at least 3 characters.')
-            .required('You must enter your pseudonyme.'),
-        yearBirth: yup.number().required('You must enter your year of birth.'),
+            .required('Enter your pseudonyme.'),
+        yearBirth: yup
+            .number()
+            .positive('Must be a positive number')
+            .integer('Must be a correct number')
+            .min(1900, 'Birth year must be greater than 1900')
+            .max(currentYear, 'Birth year must be less')
+            .required('Enter your year of birth.'),
         emailUser: yup
             .string()
-            .required('You must enter your email address.')
+            .required('Enter your email address.')
             .email('Your email address is not valid.'),
-        isMale: yup.boolean().required('You must select your gender.'),
+        isMale: yup.boolean().required('Select your gender.'),
         isEuropeanUnitMeasure: yup
             .boolean()
-            .required('You must select an unit measure.'),
-        bodySize: yup.number().required('You must enter your body size.'),
-        goalWeight: yup.number().required('You must enter a goal weight.'),
+            .required('Select an unit measure.'),
+        bodySize: yup
+            .number()
+            .positive()
+            .integer()
+            .min(100)
+            .max(250)
+            .required('Enter your body size.'),
+        goalWeight: yup.number().required('Enter a goal weight.'),
         password: yup
             .string()
-            .required('You must enter your password.')
+            .required('Enter your password.')
             .matches(passwordWithLetter, 'Your password must contain a letter.')
             .matches(passwordWithNumber, 'Your password must contain a number.')
             .matches(
@@ -97,7 +115,7 @@ export default function Register() {
             ),
         passwordBis: yup
             .string()
-            .required('You must enter your password.')
+            .required('Enter your password.')
             .matches(passwordWithLetter, 'Your password must contain a letter.')
             .matches(passwordWithNumber, 'Your password must contain a number.')
             .matches(
@@ -318,7 +336,6 @@ export default function Register() {
                                     id='yearBirth'
                                     label='Year birth'
                                     type='number'
-                                    required
                                     variant='outlined'
                                     error={Boolean(errors.yearBirth)}
                                     InputProps={{
@@ -340,47 +357,14 @@ export default function Register() {
                         )}
                     </Grid>
 
-                    <Grid item marginY={3} xs={12}>
-                        <Controller
-                            name='bodySize'
-                            control={control}
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    id='bodySize'
-                                    label='Body size'
-                                    type='number'
-                                    variant='outlined'
-                                    required
-                                    error={Boolean(errors.bodySize)}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                {'Cm'}
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
-                            )}
-                        />
-                        {errors.bodySize && (
-                            <Grid item xs={12}>
-                                <span className='errorText'>
-                                    {errors.bodySize.message}
-                                </span>
-                            </Grid>
-                        )}
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Typography color={'#555458'}>Gender</Typography>
-                    </Grid>
                     <Grid
                         container
                         justifyContent={'center'}
                         alignItems={'center'}
-                        xs={12}
                     >
+                        <Grid item xs={12}>
+                            <Typography color={'#555458'}>Gender</Typography>
+                        </Grid>
                         <WomanIcon sx={{ color: 'black' }} fontSize='large' />
                         <Controller
                             name='isMale'
@@ -429,6 +413,38 @@ export default function Register() {
 
                             <Typography color={'black'}>{'Kg/Cm'}</Typography>
                         </Grid>
+                    </Grid>
+                    <Grid item marginY={3} xs={12}>
+                        <Controller
+                            name='bodySize'
+                            control={control}
+                            render={({ field }) => (
+                                <TextField
+                                    {...field}
+                                    id='bodySize'
+                                    label='Body size (cm or inch)'
+                                    type='number'
+                                    variant='outlined'
+                                    error={Boolean(errors.bodySize)}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <InputAdornment position='end'>
+                                                {watch('isEuropeanUnitMeasure')
+                                                    ? 'cm'
+                                                    : 'inch'}
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            )}
+                        />
+                        {errors.bodySize && (
+                            <Grid item xs={12}>
+                                <span className='errorText'>
+                                    {errors.bodySize.message}
+                                </span>
+                            </Grid>
+                        )}
                     </Grid>
 
                     <Grid item xs={12}>

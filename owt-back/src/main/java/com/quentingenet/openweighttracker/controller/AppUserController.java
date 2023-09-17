@@ -13,6 +13,7 @@ import com.quentingenet.openweighttracker.security.jwt.JwtController;
 import com.quentingenet.openweighttracker.security.jwt.JwtFilter;
 import com.quentingenet.openweighttracker.security.jwt.JwtUtils;
 import com.quentingenet.openweighttracker.service.AppUserServiceImpl;
+import com.quentingenet.openweighttracker.service.MailForNewUserServiceImpl;
 import com.quentingenet.openweighttracker.service.PasswordResetTokenServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +67,9 @@ public class AppUserController {
 	EmailValidator emailValidator;
 
 	@Autowired
+	MailForNewUserServiceImpl mailForNewUserService;
+
+	@Autowired
 	PasswordResetTokenRepository passwordResetTokenRepository;
 
 	private final Logger logger = LoggerFactory.getLogger(AppUserController.class);
@@ -86,7 +90,8 @@ public class AppUserController {
 		String jwt = jwtUtils.generateToken(authentication);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-
+		SimpleMailMessage mailToSendForNewUser = mailForNewUserService.constructNewUserEmail(personToSaveDto.getAppUsername());
+		mailSender.send(mailToSendForNewUser);
 		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
 	}
 
@@ -154,7 +159,7 @@ public class AppUserController {
 	}
 
 	@PostMapping("/resetPassword")
-	public ResponseEntity<Object> resetPassword(@RequestParam("emailUser") String emailUser, HttpServletRequest request) {
+	public ResponseEntity<Object> resetPassword(@RequestBody String emailUser, HttpServletRequest request) {
 		if (emailValidator.isValidEmail(emailUser)){
 			AppUserEntity appUser = appUserRepository.findByEmailUser(emailUser);
 			if (appUser== null){

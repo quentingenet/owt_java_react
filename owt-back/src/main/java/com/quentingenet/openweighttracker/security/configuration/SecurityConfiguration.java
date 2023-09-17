@@ -38,6 +38,7 @@ public class SecurityConfiguration {
 	@Autowired
 	JwtFilter jwtFilter;
 
+	String OWT_API_URL = System.getenv("OWT_URL_API");
 	@Bean
 	SecurityFilterChain web(HttpSecurity http) throws Exception {
 		http.csrf().disable()
@@ -57,7 +58,7 @@ public class SecurityConfiguration {
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
+		configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", OWT_API_URL));
 		configuration.setAllowedMethods(Arrays.asList("GET","POST","DELETE","PATCH", "PUT"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(Arrays.asList("*"));

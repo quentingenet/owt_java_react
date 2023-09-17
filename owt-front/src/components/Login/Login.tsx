@@ -1,13 +1,16 @@
 import {
+    Alert,
     Button,
+    Collapse,
     Grid,
     IconButton,
     InputAdornment,
     TextField,
 } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import './Login.css';
-import { Person2, Visibility, VisibilityOff } from '@mui/icons-material';
+import { Email, Person2, Visibility, VisibilityOff } from '@mui/icons-material';
 import { ILoginForm } from '../../models/ILoginForm';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -15,6 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { login as loginService } from '../../services/UserService';
 import { useUserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { emailValidator } from '../../utils/Regex';
 
 export default function Login() {
     const userContext = useUserContext();
@@ -22,8 +26,10 @@ export default function Login() {
     const navigate = useNavigate();
     const [forgotPassword, setForgotPassword] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [isMailSended, setIsMailSended] = useState<boolean>(false);
+    const [errorRecovery, setErrorRecovery] = useState<boolean>(false);
+    const [emailRecovery, setEmailrecovery] = useState<string>('');
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
@@ -205,19 +211,23 @@ export default function Login() {
                                 flexDirection={'column'}
                             >
                                 <Grid item marginTop={2}>
-                                    <Controller
-                                        name='password'
-                                        control={control}
-                                        defaultValue=''
-                                        render={({ field }) => (
-                                            <TextField
-                                                {...field}
-                                                id='recoveryEmail'
-                                                label='Recovery email'
-                                                variant='outlined'
-                                            />
-                                        )}
+                                    <TextField
+                                        id='emailRecovery'
+                                        label='Email'
+                                        variant='outlined'
+                                        onChange={(event) =>
+                                            setEmailrecovery(event.target.value)
+                                        }
+                                        value={emailRecovery}
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <Email />
+                                                </InputAdornment>
+                                            ),
+                                        }}
                                     />
+                                    /
                                 </Grid>
                                 <Grid item marginY={2}>
                                     <Button
@@ -226,13 +236,82 @@ export default function Login() {
                                         size='large'
                                         onClick={() => {
                                             //TODO: appel du backend pour reset le mot de passe + page reset password
-                                            setForgotPassword(false);
-                                            navigate('/reset-password');
+                                            if (
+                                                emailRecovery.match(
+                                                    emailValidator
+                                                )
+                                            ) {
+                                                setIsMailSended(true);
+                                                setErrorRecovery(false);
+                                            } else {
+                                                setErrorRecovery(true);
+                                            }
                                         }}
                                     >
                                         SEND RECOVERY EMAIL
                                     </Button>
                                 </Grid>
+                                {errorRecovery && (
+                                    <Grid item marginY={2}>
+                                        <Collapse in={errorRecovery}>
+                                            <Alert
+                                                severity='error'
+                                                action={
+                                                    <IconButton
+                                                        aria-label='close'
+                                                        color='inherit'
+                                                        size='small'
+                                                        onClick={() => {
+                                                            setErrorRecovery(
+                                                                false
+                                                            );
+                                                            setForgotPassword(
+                                                                false
+                                                            );
+                                                        }}
+                                                    >
+                                                        <CloseIcon fontSize='inherit' />
+                                                    </IconButton>
+                                                }
+                                                sx={{ mb: 2 }}
+                                            >
+                                                Error, mail is not sended
+                                            </Alert>
+                                        </Collapse>
+                                    </Grid>
+                                )}
+                                {isMailSended && (
+                                    <Grid item marginY={2}>
+                                        <Collapse in={isMailSended}>
+                                            <Alert
+                                                action={
+                                                    <IconButton
+                                                        aria-label='close'
+                                                        color='inherit'
+                                                        size='small'
+                                                        onClick={() => {
+                                                            setIsMailSended(
+                                                                false
+                                                            );
+                                                            setForgotPassword(
+                                                                false
+                                                            );
+                                                        }}
+                                                    >
+                                                        <CloseIcon fontSize='inherit' />
+                                                    </IconButton>
+                                                }
+                                                sx={{
+                                                    mb: 2,
+                                                }}
+                                            >
+                                                Mail is sended. Maybe check your
+                                                spams folder if you don't see it
+                                                from inbox
+                                            </Alert>
+                                        </Collapse>
+                                    </Grid>
+                                )}
                             </Grid>
                         )}
                     </Grid>
