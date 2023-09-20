@@ -54,8 +54,10 @@ export default function Landpage() {
                         <Typography variant='h5'>Register</Typography>
                     </Stack>
                 </Grid>
-                <Grid item xs={12}>
-                    {isFirstConnection ? <Register /> : <Login />}
+                <Grid container justifyContent={'center'}>
+                    <Grid item xs={10}>
+                        {isFirstConnection ? <Register /> : <Login />}
+                    </Grid>
                 </Grid>
                 <Grid
                     item

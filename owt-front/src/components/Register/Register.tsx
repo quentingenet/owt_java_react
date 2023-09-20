@@ -380,7 +380,7 @@ export default function Register() {
                     </Grid>
 
                     <Grid container justifyContent={'center'}>
-                        <Grid item xs={7} lg={5}>
+                        <Grid item xs={9} sm={6} md={7} lg={6}>
                             <Controller
                                 name='isMale'
                                 control={control}
