@@ -7,26 +7,28 @@
 ![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-badge&logo=debian&logoColor=white)
 ![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
 <br>
-**_OpenWeightTracker (OWT)_** is a free and opensource application under Copyleft.
-<br>This is a simple and easy way to have a look on your weight !
-It respect your data, and respect your privacy.
+**OpenWeightTracker (OWT)** is a free and open-source application released under the Copyleft license.
+<br>It provides a simple and user-friendly way to track your weight while respecting your data and privacy.
 <br><br>Coming soon on [OWT just here !](https://owt.quentingenet.fr) 
 ## Technologies
 
-**OWT** is developed, for the backend, in **Java(JDK17)** with the **framework Spring** with Spring Boot, Data/JPA, and Spring Security.
-<br>Concerning front end, application is developed with **React**.
+**OWT** is developed using **Java (JDK 17)** for the backend, along with the **Spring framework**, including Spring Boot, Spring Data/JPA, and Spring Security.
+<br>For the frontend, the application is developed with **React**.
 
 ## How to contribute ?
-There are possibilities improvements and ideas... <br>
-Contributions and pull request are welcome ;-) ! 
+
+
+There are opportunities for further improvements and ideas.
+<br>Contributions and pull requests are welcome ! 
 <br>
 Nobody should be restricted by the software they use. There are four freedoms that every user should have:
 - the freedom to use the software for any purpose,
 - the freedom to change the software to suit your needs,
-- the freedom to share the software with your friends and neighbors, and
+- the freedom to share the software with your friends and neighbors,
 - the freedom to share the changes you make.
 
-## Author
-* Quentin GENET
+## Author and contributors
+* Quentin GENET (Author)
+* Maybe you as contributor... ? 😄
 
 ![OWT preview](https://github.com/quentingenet/owt/blob/main/owt_preview.png)
