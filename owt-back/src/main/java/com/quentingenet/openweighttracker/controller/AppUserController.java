@@ -76,7 +76,6 @@ public class AppUserController {
 
 	@PostMapping("/add")
 	public ResponseEntity<Object> addUser(@Valid @RequestBody NewPersonToSaveDto personToSaveDto) {
-
 		logger.info("POST /users/add");
 
 		AppUserEntity existingUser = appUserRepository.findByAppUsername(personToSaveDto.getAppUsername());

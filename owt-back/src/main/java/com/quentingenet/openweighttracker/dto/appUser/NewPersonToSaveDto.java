@@ -2,14 +2,15 @@ package com.quentingenet.openweighttracker.dto.appUser;
 
 public class NewPersonToSaveDto {
 	// INITIAL DATA
-	private Boolean isEuropeanUnitMeasure;
+	private boolean isEuropeanUnitMeasure;
 
-	private Boolean isAcceptedTerms;
+	private boolean isAcceptedTerms;
+
 	private Double goalWeight;
 
 	private Double bodySize;
 
-	private Boolean isMale;
+	private boolean isMale;
 
 	private Integer yearBirth;
 
@@ -21,14 +22,22 @@ public class NewPersonToSaveDto {
 	private String emailUser;
 
 	/* Getters and setters */
-	public Boolean getIsEuropeanUnitMeasure() {
+
+	public boolean isEuropeanUnitMeasure() {
 		return isEuropeanUnitMeasure;
 	}
 
-	public void setIsEuropeanUnitMeasure(Boolean isEuropeanUnitMeasure) {
-		this.isEuropeanUnitMeasure = isEuropeanUnitMeasure;
+	public void setEuropeanUnitMeasure(boolean europeanUnitMeasure) {
+		isEuropeanUnitMeasure = europeanUnitMeasure;
 	}
 
+	public boolean isAcceptedTerms() {
+		return isAcceptedTerms;
+	}
+
+	public void setAcceptedTerms(boolean acceptedTerms) {
+		isAcceptedTerms = acceptedTerms;
+	}
 
 	public Double getGoalWeight() {
 		return goalWeight;
@@ -46,12 +55,12 @@ public class NewPersonToSaveDto {
 		this.bodySize = bodySize;
 	}
 
-	public Boolean getIsMale() {
+	public boolean isMale() {
 		return isMale;
 	}
 
-	public void setIsMale(Boolean isMale) {
-		this.isMale = isMale;
+	public void setMale(boolean male) {
+		isMale = male;
 	}
 
 	public Integer getYearBirth() {
@@ -84,12 +93,5 @@ public class NewPersonToSaveDto {
 
 	public void setEmailUser(String emailUser) {
 		this.emailUser = emailUser;
-	}
-
-	public Boolean getAcceptedTerms() {
-		return isAcceptedTerms;
-	}
-	public void setAcceptedTerms(Boolean acceptedTerms) {
-		isAcceptedTerms = acceptedTerms;
 	}
 }

@@ -28,7 +28,7 @@ public class BodyMassIndexServiceImpl implements BodyMassIndexService{
 
   //TODO  trouver ou sauvegarder le BIM et quand
   @Override
-  public BodyMassIndexEntity bmiCalculator(Double userLastWeight, Double bodySize, Boolean isEuropeanUnitMeasure, Long personId) {
+  public BodyMassIndexEntity bmiCalculator(Double userLastWeight, Double bodySize, boolean isEuropeanUnitMeasure, Long personId) {
     //MUST TO CHECK WHICH IS VALUE OF THE BOOLEAN IN THE FRONT END TO SAVE GOOD FORMAT DATA : US OR EUROPEAN
 		/*
 		 BMI = weight ÷ height²

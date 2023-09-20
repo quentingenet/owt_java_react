@@ -73,11 +73,10 @@ public class AppUserServiceImpl implements AppUserService {
 		initialDataEntity.setBodySize(personToSaveDto.getBodySize());
 		initialDataEntity.setRegisterUserDate(LocalDate.now());
 		initialDataEntity.setGoalWeight(personToSaveDto.getGoalWeight());
-		initialDataEntity.setIsMale(personToSaveDto.getIsMale());
-		initialDataEntity.setIsEuropeanUnitMeasure(personToSaveDto.getIsEuropeanUnitMeasure());
+		initialDataEntity.setMale(personToSaveDto.isMale());
+		initialDataEntity.setEuropeanUnitMeasure(personToSaveDto.isEuropeanUnitMeasure());
 		initialDataEntity.setYearBirth(personToSaveDto.getYearBirth());
-		initialDataEntity.setAcceptedTerms(personToSaveDto.getAcceptedTerms());
-
+		initialDataEntity.setAcceptedTerms(personToSaveDto.isAcceptedTerms());
 		personEntityToSave.setAppUserPerson(appUserEntity);
 		personEntityToSave.setUserInitData(initialDataEntity);
 
@@ -109,8 +108,8 @@ public class AppUserServiceImpl implements AppUserService {
 				if (personToUpdateFromUser.getGoalWeight() != null) {
 					personUpdated.getUserInitData().setGoalWeight(personToUpdateFromUser.getGoalWeight());
 				}
-				if (personToUpdateFromUser.getIsMale() != null) {
-					personUpdated.getUserInitData().setIsMale(personToUpdateFromUser.getIsMale());
+				if (personToUpdateFromUser.isMale()) {
+					personUpdated.getUserInitData().setMale(personToUpdateFromUser.isMale());
 				}
 				if (personToUpdateFromUser.getYearBirth() != null){
 					personUpdated.getUserInitData().setYearBirth(personToUpdateFromUser.getYearBirth());

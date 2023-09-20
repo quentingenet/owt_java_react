@@ -15,13 +15,14 @@ public class ProfileAppUserDto {
 
 	private WeightRecordEntity lastWeight;
 
-	private Boolean isMale;
+	private boolean isMale;
 
-	private Boolean isEuropeanUnitMeasure;
+	private boolean isEuropeanUnitMeasure;
 
 	private Integer age;
 
 	/*Getters and setters*/
+
 	public String getAppUserName() {
 		return appUserName;
 	}
@@ -54,19 +55,27 @@ public class ProfileAppUserDto {
 		this.currentBimValue = currentBimValue;
 	}
 
-	public Boolean getMale() {
+	public WeightRecordEntity getLastWeight() {
+		return lastWeight;
+	}
+
+	public void setLastWeight(WeightRecordEntity lastWeight) {
+		this.lastWeight = lastWeight;
+	}
+
+	public boolean isMale() {
 		return isMale;
 	}
 
-	public void setMale(Boolean male) {
+	public void setMale(boolean male) {
 		isMale = male;
 	}
 
-	public Boolean getEuropeanUnitMeasure() {
+	public boolean isEuropeanUnitMeasure() {
 		return isEuropeanUnitMeasure;
 	}
 
-	public void setEuropeanUnitMeasure(Boolean europeanUnitMeasure) {
+	public void setEuropeanUnitMeasure(boolean europeanUnitMeasure) {
 		isEuropeanUnitMeasure = europeanUnitMeasure;
 	}
 
@@ -76,13 +85,5 @@ public class ProfileAppUserDto {
 
 	public void setAge(Integer age) {
 		this.age = age;
-	}
-
-	public WeightRecordEntity getLastWeight() {
-		return lastWeight;
-	}
-
-	public void setLastWeight(WeightRecordEntity lastWeight) {
-		this.lastWeight = lastWeight;
 	}
 }

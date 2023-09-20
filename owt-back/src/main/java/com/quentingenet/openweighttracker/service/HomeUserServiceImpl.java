@@ -31,8 +31,8 @@ public class HomeUserServiceImpl implements HomeUserService {
 		profileDataUser.setAppUserName(personEntityConnected.getAppUserPerson().getAppUsername());
 		profileDataUser.setBodySize(personEntityConnected.getUserInitData().getBodySize());
 		profileDataUser.setGoalWeight(personEntityConnected.getUserInitData().getGoalWeight());
-		profileDataUser.setMale(personEntityConnected.getUserInitData().getIsMale());
-		profileDataUser.setEuropeanUnitMeasure(personEntityConnected.getUserInitData().getIsEuropeanUnitMeasure());
+		profileDataUser.setMale(personEntityConnected.getUserInitData().isMale());
+		profileDataUser.setEuropeanUnitMeasure(personEntityConnected.getUserInitData().isEuropeanUnitMeasure());
 		profileDataUser.setAge(LocalDate.now().getYear() - personEntityConnected.getUserInitData().getYearBirth());
 		try{
 			profileDataUser.setLastWeight(personEntityConnected.getWeightsList().get(personEntityConnected.getWeightsList().size()-1));
