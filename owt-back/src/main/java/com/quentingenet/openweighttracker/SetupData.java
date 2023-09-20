@@ -48,6 +48,8 @@ public class SetupData implements CommandLineRunner {
   @Transactional
   public void run(String... args) throws Exception {
 
+    final String OWT_USER_ADMIN_PASSWORD = System.getenv("OWT_USER_ADMIN_PASSWORD");
+    final String OWT_USER_ADMIN_EMAIL = System.getenv("OWT_USER_ADMIN_EMAIL");
     AppUserEntity appUserFinded= appUserRepository.findByAppUsername("kent1");
 
     if (appUserFinded == null){
@@ -71,8 +73,8 @@ public class SetupData implements CommandLineRunner {
 
       appUser.setAppUsername("kent1");
       appUser.setRoles(Arrays.asList(adminRole));
-      appUser.setPassword(passwordEncoder.encode("coucou"));
-      appUser.setEmailUser("genetquentin@gmail.com");
+      appUser.setPassword(passwordEncoder.encode(OWT_USER_ADMIN_PASSWORD));
+      appUser.setEmailUser(OWT_USER_ADMIN_EMAIL);
 
       appUserRepository.save(appUser);
 
