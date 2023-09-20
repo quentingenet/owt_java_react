@@ -56,7 +56,7 @@ export default function Register() {
     };
 
     useEffect(() => {
-        if (genderStr == 'Man') {
+        if (genderStr === 'Man') {
             setGender(true);
         } else {
             setGender(false);
@@ -160,7 +160,7 @@ export default function Register() {
         passwordBis: watch('passwordBis'),
         emailUser: watch('emailUser'),
         yearBirth: watch('yearBirth'),
-        isMale: watch('isMale'),
+        isMale: gender,
         isEuropeanUnitMeasure: watch('isEuropeanUnitMeasure'),
         bodySize: watch('bodySize'),
         goalWeight: watch('goalWeight'),
@@ -170,6 +170,7 @@ export default function Register() {
     const submitRegister = () => {
         if (isValid) {
             try {
+                console.log('IS MALE BOOLEAN===', dataRegister.isMale);
                 registerService(dataRegister).then((response) => {
                     if (response) {
                         const localStorageJwt =
