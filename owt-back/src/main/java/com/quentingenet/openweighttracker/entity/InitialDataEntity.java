@@ -39,7 +39,7 @@ public class InitialDataEntity implements Serializable {
 	private Boolean isAcceptedTerms;
 
 	@Min(1900)
-	@Max(2022)
+	@Max(2023)
 	@Column(name = "year_birth", nullable = false, length = 5)
 	private Integer yearBirth;
 

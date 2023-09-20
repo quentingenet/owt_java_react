@@ -44,6 +44,7 @@ export const register = (dataRegister: IRegisterForm) => {
         isEuropeanUnitMeasure: dataRegister.isEuropeanUnitMeasure,
         bodySize: dataRegister.bodySize,
         goalWeight: dataRegister.goalWeight,
+        isAcceptedTerms: dataRegister.isAcceptedTerms,
     };
 
     return new Promise((resolve, reject) => {
