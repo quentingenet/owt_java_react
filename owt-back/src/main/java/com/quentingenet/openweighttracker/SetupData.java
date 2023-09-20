@@ -81,9 +81,9 @@ public class SetupData implements CommandLineRunner {
       initialDataEntity.setRegisterUserDate(LocalDate.now());
       initialDataEntity.setYearBirth(1985);
       initialDataEntity.setGoalWeight(85d);
-      initialDataEntity.setIsEuropeanUnitMeasure(true);
+      initialDataEntity.setEuropeanUnitMeasure(true);
       initialDataEntity.setBodySize(184d);
-      initialDataEntity.setIsMale(true);
+      initialDataEntity.setMale(true);
       initialDataEntity.setAcceptedTerms(true);
 
       initialDataRepository.save(initialDataEntity);

@@ -30,13 +30,13 @@ public class InitialDataEntity implements Serializable {
 	private Double bodySize;
 
 	@Column(name = "is_male", nullable = false)
-	private Boolean isMale;
+	private boolean isMale;
 
 	@Column(name = "is_european_unit_measure", nullable = false)
-	private Boolean isEuropeanUnitMeasure;
+	private boolean isEuropeanUnitMeasure;
 	// kg = lbs(pounds) cm = inch metre = feet
 	@Column(name = "is_accepted_terms", nullable = false)
-	private Boolean isAcceptedTerms;
+	private boolean isAcceptedTerms;
 
 	@Min(1900)
 	@Max(2023)
@@ -46,12 +46,21 @@ public class InitialDataEntity implements Serializable {
 
 
 	/* Getters and setters */
+
 	public Long getIdInitialData() {
 		return idInitialData;
 	}
 
 	public void setIdInitialData(Long idInitialData) {
 		this.idInitialData = idInitialData;
+	}
+
+	public LocalDate getRegisterUserDate() {
+		return registerUserDate;
+	}
+
+	public void setRegisterUserDate(LocalDate registerUserDate) {
+		this.registerUserDate = registerUserDate;
 	}
 
 	public Double getGoalWeight() {
@@ -70,43 +79,35 @@ public class InitialDataEntity implements Serializable {
 		this.bodySize = bodySize;
 	}
 
+	public boolean isMale() {
+		return isMale;
+	}
+
+	public void setMale(boolean male) {
+		isMale = male;
+	}
+
+	public boolean isEuropeanUnitMeasure() {
+		return isEuropeanUnitMeasure;
+	}
+
+	public void setEuropeanUnitMeasure(boolean europeanUnitMeasure) {
+		isEuropeanUnitMeasure = europeanUnitMeasure;
+	}
+
+	public boolean isAcceptedTerms() {
+		return isAcceptedTerms;
+	}
+
+	public void setAcceptedTerms(boolean acceptedTerms) {
+		isAcceptedTerms = acceptedTerms;
+	}
+
 	public Integer getYearBirth() {
 		return yearBirth;
 	}
 
 	public void setYearBirth(Integer yearBirth) {
 		this.yearBirth = yearBirth;
-	}
-
-	public LocalDate getRegisterUserDate() {
-		return registerUserDate;
-	}
-
-	public void setRegisterUserDate(LocalDate registerUserDate) {
-		this.registerUserDate = registerUserDate;
-	}
-
-	public Boolean getIsMale() {
-		return isMale;
-	}
-
-	public void setIsMale(Boolean isMale) {
-		this.isMale = isMale;
-	}
-
-	public Boolean getIsEuropeanUnitMeasure() {
-		return isEuropeanUnitMeasure;
-	}
-
-	public void setIsEuropeanUnitMeasure(Boolean isEuropeanUnitMeasure) {
-		this.isEuropeanUnitMeasure = isEuropeanUnitMeasure;
-	}
-
-	public Boolean getAcceptedTerms() {
-		return isAcceptedTerms;
-	}
-
-	public void setAcceptedTerms(Boolean acceptedTerms) {
-		isAcceptedTerms = acceptedTerms;
 	}
 }

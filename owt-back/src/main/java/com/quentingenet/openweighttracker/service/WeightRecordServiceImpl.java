@@ -84,7 +84,7 @@ public class WeightRecordServiceImpl implements WeightRecordService {
 
 		BodyMassIndexEntity bimToSave = bodyMassIndexService.bmiCalculator(weightRecordFromUser.getWeightValue(),
 				personToSave.getUserInitData().getBodySize(),
-				personToSave.getUserInitData().getIsEuropeanUnitMeasure(),
+				personToSave.getUserInitData().isEuropeanUnitMeasure(),
 				idUser);
 
 		newSavedWeightRecord.setBmi(bimToSave);
@@ -119,7 +119,7 @@ public class WeightRecordServiceImpl implements WeightRecordService {
 
 				BodyMassIndexEntity bimToSave = bodyMassIndexService.bmiCalculator(weightRecordFromUser.getWeightValue(),
 						personFound.getUserInitData().getBodySize(),
-						personFound.getUserInitData().getIsEuropeanUnitMeasure(),
+						personFound.getUserInitData().isEuropeanUnitMeasure(),
 						idUser);
 
 				weightRecordToUpdate.setBmi(bimToSave);
