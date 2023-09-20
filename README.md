@@ -1,4 +1,4 @@
-<center># Open Weight Tracker</center>
+# Open Weight Tracker
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
@@ -34,4 +34,4 @@ Nobody should be restricted by the software they use. There are four freedoms th
 -   Quentin GENET (Author)
 -   Maybe you as contributor... ? 😄
 
-<center>![OWT preview](https://github.com/quentingenet/owt/blob/main/owt_preview.png)</center>
+![OWT preview](https://github.com/quentingenet/owt/blob/main/owt_preview.png)
