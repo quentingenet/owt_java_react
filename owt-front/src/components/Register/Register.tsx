@@ -5,21 +5,24 @@ import {
     Email,
     CalendarMonth,
 } from '@mui/icons-material';
-import ManIcon from '@mui/icons-material/Man';
-import WomanIcon from '@mui/icons-material/Woman';
 import {
     Button,
     Checkbox,
+    FormControl,
     FormControlLabel,
     Grid,
     IconButton,
     InputAdornment,
+    InputLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
     Slider,
     Switch,
     TextField,
     Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IRegisterForm } from '../../models/IRegisterForm';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -38,12 +41,27 @@ export default function Register() {
     const userContext = useUserContext();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [gender, setGender] = useState<boolean>(false);
+    const [genderStr, setGenderStr] = useState<string>('Woman');
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+
     const handleMouseDownPassword = (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.preventDefault();
     };
+
+    const handleChangeGenderStr = (event: SelectChangeEvent) => {
+        setGenderStr(event.target.value);
+    };
+
+    useEffect(() => {
+        if (genderStr == 'Man') {
+            setGender(true);
+        } else {
+            setGender(false);
+        }
+    }, [gender, genderStr]);
 
     const currentYear = new Date().getFullYear();
 
@@ -360,32 +378,40 @@ export default function Register() {
                         )}
                     </Grid>
 
-                    <Grid
-                        container
-                        justifyContent={'center'}
-                        alignItems={'center'}
-                    >
-                        <Grid item xs={12}>
-                            <Typography color={'#555458'}>Gender</Typography>
+                    <Grid container justifyContent={'center'}>
+                        <Grid item xs={7} lg={5}>
+                            <Controller
+                                name='isMale'
+                                control={control}
+                                defaultValue={false}
+                                render={({ field }) => (
+                                    <FormControl fullWidth>
+                                        <InputLabel id='demo-simple-select-label'>
+                                            Gender
+                                        </InputLabel>
+                                        <Select
+                                            {...field}
+                                            labelId='demo-simple-select-label'
+                                            id='demo-simple-select'
+                                            value={genderStr}
+                                            label='Gender'
+                                            onChange={handleChangeGenderStr}
+                                        >
+                                            <MenuItem value={'Man'}>
+                                                Man
+                                            </MenuItem>
+                                            <MenuItem value={'Woman'}>
+                                                Woman
+                                            </MenuItem>
+                                            <MenuItem value={'Neutral'}>
+                                                Neutral
+                                            </MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                )}
+                            />
                         </Grid>
-                        <WomanIcon sx={{ color: 'black' }} fontSize='large' />
-                        <Controller
-                            name='isMale'
-                            control={control}
-                            defaultValue={false}
-                            render={({ field }) => (
-                                <Switch
-                                    {...field}
-                                    id='isMale'
-                                    size='medium'
-                                    inputProps={{ 'aria-label': 'ant design' }}
-                                    checked={watch('isMale')}
-                                />
-                            )}
-                        />
-                        <ManIcon sx={{ color: 'black' }} fontSize='large' />
                     </Grid>
-
                     <Grid item xs={12} marginY={2}>
                         <Grid item xs={12}>
                             <Typography color={'#555458'}>
@@ -515,7 +541,6 @@ export default function Register() {
                             <Controller
                                 name='isAcceptedTerms'
                                 control={control}
-                                defaultValue={false}
                                 render={({ field }) => (
                                     <FormControlLabel
                                         {...field}
