@@ -4,7 +4,7 @@ export interface IRegisterForm {
     passwordBis: string;
     emailUser: string;
     yearBirth: number;
-    isMale: boolean;
+    isMale?: boolean;
     isEuropeanUnitMeasure: boolean;
     bodySize: number;
     goalWeight: number;

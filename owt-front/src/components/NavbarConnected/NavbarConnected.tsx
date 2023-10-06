@@ -19,8 +19,8 @@ import { useUserContext } from '../../contexts/UserContext';
 export default function NavbarConnected() {
     const navigate = useNavigate();
 
-    const pages = ['Dashboard', 'Weights', 'Contact'];
-    const settings = ['Dashboard', 'Weights', 'Contact', 'Logout'];
+    const pages = ['Dashboard', 'Weights', 'Profile', 'Contact'];
+    const settings = ['Dashboard', 'Weights', 'Profile', 'Contact', 'Logout'];
 
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

@@ -98,95 +98,101 @@ export default function Login() {
                     onSubmit={handleSubmit(submitLogin)}
                     className='loginFormInput'
                 >
-                    <Grid item xs={12} marginY={3}>
-                        <Controller
-                            name='username'
-                            control={control}
-                            defaultValue=''
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    id='username'
-                                    label='Username'
-                                    type='text'
-                                    variant='outlined'
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <IconButton
-                                                    aria-label='toggle password visibility'
-                                                    edge='end'
-                                                >
-                                                    <Person2 />
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
+                    <Grid container marginTop={2} justifyContent={'center'}>
+                        <Grid item xs={10} marginY={1}>
+                            <Controller
+                                name='username'
+                                control={control}
+                                defaultValue=''
+                                render={({ field }) => (
+                                    <TextField
+                                        {...field}
+                                        id='username'
+                                        label='Username'
+                                        type='text'
+                                        variant='outlined'
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <IconButton
+                                                        aria-label='toggle password visibility'
+                                                        edge='end'
+                                                    >
+                                                        <Person2 />
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
+                                )}
+                            />
+                            {errors.username && (
+                                <Grid item xs={12}>
+                                    <span className='errorText'>
+                                        {errors.username.message}
+                                    </span>
+                                </Grid>
                             )}
-                        />
-                        {errors.username && (
-                            <Grid item xs={12}>
-                                <span className='errorText'>
-                                    {errors.username.message}
-                                </span>
-                            </Grid>
-                        )}
+                        </Grid>
                     </Grid>
-                    <Grid item marginY={3} xs={12}>
-                        <Controller
-                            name='password'
-                            control={control}
-                            defaultValue=''
-                            render={({ field }) => (
-                                <TextField
-                                    {...field}
-                                    id='password'
-                                    label='Password'
-                                    type={showPassword ? 'text' : 'password'}
-                                    variant='outlined'
-                                    InputProps={{
-                                        endAdornment: (
-                                            <InputAdornment position='end'>
-                                                <IconButton
-                                                    aria-label='toggle password visibility'
-                                                    onClick={
-                                                        handleClickShowPassword
-                                                    }
-                                                    onMouseDown={
-                                                        handleMouseDownPassword
-                                                    }
-                                                    edge='end'
-                                                >
-                                                    {showPassword ? (
-                                                        <VisibilityOff />
-                                                    ) : (
-                                                        <Visibility />
-                                                    )}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    }}
-                                />
+                    <Grid container marginTop={1} justifyContent={'center'}>
+                        <Grid item xs={10}>
+                            <Controller
+                                name='password'
+                                control={control}
+                                defaultValue=''
+                                render={({ field }) => (
+                                    <TextField
+                                        {...field}
+                                        id='password'
+                                        label='Password'
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
+                                        variant='outlined'
+                                        InputProps={{
+                                            endAdornment: (
+                                                <InputAdornment position='end'>
+                                                    <IconButton
+                                                        aria-label='toggle password visibility'
+                                                        onClick={
+                                                            handleClickShowPassword
+                                                        }
+                                                        onMouseDown={
+                                                            handleMouseDownPassword
+                                                        }
+                                                        edge='end'
+                                                    >
+                                                        {showPassword ? (
+                                                            <VisibilityOff />
+                                                        ) : (
+                                                            <Visibility />
+                                                        )}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                    />
+                                )}
+                            />
+                            {errors.password && (
+                                <Grid item xs={12}>
+                                    <span className='errorText'>
+                                        {errors.password.message}
+                                    </span>
+                                </Grid>
                             )}
-                        />
-                        {errors.password && (
-                            <Grid item xs={12}>
-                                <span className='errorText'>
-                                    {errors.password.message}
-                                </span>
-                            </Grid>
-                        )}
+                        </Grid>
                     </Grid>
+
                     <Grid
-                        item
+                        container
                         marginY={2}
-                        xs={12}
                         justifyContent={'center'}
                         flexDirection={'column'}
                         alignItems={'center'}
                     >
-                        <Grid item marginBottom={2}>
+                        <Grid item xs={10} marginBottom={2}>
                             <Button
                                 type='submit'
                                 variant='contained'
@@ -206,50 +212,55 @@ export default function Login() {
                         {forgotPassword && (
                             <Grid
                                 container
-                                xs={12}
                                 justifyContent={'center'}
                                 flexDirection={'column'}
                             >
-                                <Grid item marginTop={2}>
-                                    <TextField
-                                        id='emailRecovery'
-                                        label='Email'
-                                        variant='outlined'
-                                        onChange={(event) =>
-                                            setEmailrecovery(event.target.value)
-                                        }
-                                        value={emailRecovery}
-                                        InputProps={{
-                                            endAdornment: (
-                                                <InputAdornment position='end'>
-                                                    <Email />
-                                                </InputAdornment>
-                                            ),
-                                        }}
-                                    />
-                                    /
-                                </Grid>
-                                <Grid item marginY={2}>
-                                    <Button
-                                        variant='contained'
-                                        color='primary'
-                                        size='large'
-                                        onClick={() => {
-                                            //TODO: appel du backend pour reset le mot de passe + page reset password
-                                            if (
-                                                emailRecovery.match(
-                                                    emailValidator
+                                <Grid container justifyContent={'center'}>
+                                    <Grid item xs={10} marginTop={2}>
+                                        <TextField
+                                            id='emailRecovery'
+                                            label='Email'
+                                            variant='outlined'
+                                            onChange={(event) =>
+                                                setEmailrecovery(
+                                                    event.target.value
                                                 )
-                                            ) {
-                                                setIsMailSended(true);
-                                                setErrorRecovery(false);
-                                            } else {
-                                                setErrorRecovery(true);
                                             }
-                                        }}
-                                    >
-                                        SEND RECOVERY EMAIL
-                                    </Button>
+                                            value={emailRecovery}
+                                            InputProps={{
+                                                endAdornment: (
+                                                    <InputAdornment position='end'>
+                                                        <Email />
+                                                    </InputAdornment>
+                                                ),
+                                            }}
+                                        />
+                                        /
+                                    </Grid>
+                                </Grid>
+                                <Grid container justifyContent={'center'}>
+                                    <Grid item xs={10} marginY={2}>
+                                        <Button
+                                            variant='contained'
+                                            color='primary'
+                                            size='large'
+                                            onClick={() => {
+                                                //TODO: appel du backend pour reset le mot de passe + page reset password
+                                                if (
+                                                    emailRecovery.match(
+                                                        emailValidator
+                                                    )
+                                                ) {
+                                                    setIsMailSended(true);
+                                                    setErrorRecovery(false);
+                                                } else {
+                                                    setErrorRecovery(true);
+                                                }
+                                            }}
+                                        >
+                                            SEND RECOVERY EMAIL
+                                        </Button>
+                                    </Grid>
                                 </Grid>
                                 {errorRecovery && (
                                     <Grid item marginY={2}>
@@ -275,7 +286,7 @@ export default function Login() {
                                                 }
                                                 sx={{ mb: 2 }}
                                             >
-                                                Error, mail is not sended
+                                                Error, email not sended
                                             </Alert>
                                         </Collapse>
                                     </Grid>
