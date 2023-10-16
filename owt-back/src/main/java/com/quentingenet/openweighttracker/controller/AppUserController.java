@@ -30,10 +30,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/users")
@@ -89,9 +86,12 @@ public class AppUserController {
 		String jwt = jwtUtils.generateToken(authentication);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+		httpHeaders.add(HttpHeaders.CONTENT_TYPE,"application/json");
 		SimpleMailMessage mailToSendForNewUser = mailForNewUserService.constructNewUserEmail(personToSaveDto.getAppUsername());
 		mailSender.send(mailToSendForNewUser);
-		return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+		Map<String, Object> response = new HashMap<>();
+		response.put("message", "User registered successfully");
+		return new ResponseEntity<>(response, httpHeaders, HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{idUser}")
