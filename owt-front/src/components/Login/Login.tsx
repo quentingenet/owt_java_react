@@ -1,6 +1,7 @@
 import {
     Alert,
     Button,
+    CircularProgress,
     Collapse,
     Grid,
     IconButton,
@@ -24,6 +25,7 @@ export default function Login() {
     const userContext = useUserContext();
 
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [forgotPassword, setForgotPassword] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [isMailSended, setIsMailSended] = useState<boolean>(false);
@@ -70,6 +72,7 @@ export default function Login() {
     const submitLogin = () => {
         if (isValid) {
             try {
+                setIsLoading(true);
                 loginService(dataLogin).then((response) => {
                     if (response) {
                         userContext.setIsUserLoggedIn(true);
@@ -81,6 +84,7 @@ export default function Login() {
                             localStorageJwt?.startsWith('Bearer')
                         ) {
                             userContext.setJwt(localStorageJwt);
+                            setIsLoading(false);
                             navigate('/dashboard');
                         }
                     }
@@ -193,15 +197,19 @@ export default function Login() {
                         alignItems={'center'}
                     >
                         <Grid item xs={10} marginBottom={2}>
-                            <Button
-                                type='submit'
-                                variant='contained'
-                                color='primary'
-                                size='large'
-                                disabled={forgotPassword ? true : false}
-                            >
-                                Login
-                            </Button>
+                            {isLoading ? (
+                                <CircularProgress color='primary' />
+                            ) : (
+                                <Button
+                                    type='submit'
+                                    variant='contained'
+                                    color='primary'
+                                    size='large'
+                                    disabled={forgotPassword ? true : false}
+                                >
+                                    Login
+                                </Button>
+                            )}
                         </Grid>
                         <span
                             className='forgot-password'

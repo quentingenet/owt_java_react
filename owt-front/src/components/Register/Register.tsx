@@ -9,6 +9,7 @@ import Radio from '@mui/material/Radio';
 import {
     Button,
     Checkbox,
+    CircularProgress,
     FormControl,
     FormControlLabel,
     FormLabel,
@@ -43,6 +44,7 @@ export default function Register() {
     const [gender, setGender] = useState<boolean>(false);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const [valueGender, setValueGender] = useState('Male');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleChangeGender = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValueGender((event.target as HTMLInputElement).value);
@@ -163,12 +165,14 @@ export default function Register() {
         console.log(dataRegister);
         if (isValid) {
             try {
+                setIsLoading(true);
                 registerService(dataRegister).then((response) => {
                     if (response) {
                         const localStorageJwt =
                             localStorage.getItem('jwt') || '';
                         userContext.setJwt(localStorageJwt);
                         userContext.setIsUserLoggedIn(true);
+                        setIsLoading(false);
                         navigate('/dashboard');
                     }
                 });
@@ -622,14 +626,18 @@ export default function Register() {
                     </Grid>
                     <Grid container justifyContent={'center'}>
                         <Grid item marginY={3} xs={10}>
-                            <Button
-                                type='submit'
-                                variant='contained'
-                                color='primary'
-                                size='large'
-                            >
-                                Register
-                            </Button>
+                            {isLoading ? (
+                                <CircularProgress color='primary' />
+                            ) : (
+                                <Button
+                                    type='submit'
+                                    variant='contained'
+                                    color='primary'
+                                    size='large'
+                                >
+                                    Register
+                                </Button>
+                            )}
                         </Grid>
                     </Grid>
                 </form>
